@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Services - Bacoor City LGU</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-brand">
+                    <div class="seal-container">
+                        <div class="seal-placeholder">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="50" cy="50" r="35" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M50 20 L55 35 L70 35 L58 45 L63 60 L50 50 L37 60 L42 45 L30 35 L45 35 Z" fill="currentColor"/>
+                                <text x="50" y="85" font-size="12" text-anchor="middle" fill="currentColor" font-weight="bold">BACOOR</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="brand-text">
+                        <h1>City of Bacoor</h1>
+                        <p class="tagline">Lungsod ng Bacoor • Ciudad ng Bacoor</p>
+                    </div>
+                </div>
+                <div class="header-search">
+                    <input type="text" id="headerSearch" placeholder="Search services, departments...">
+                    <button onclick="performSearch()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Bacoor</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="services.html" class="active">Public Services</a></li>
+                    <li><a href="news.html">News & Announcements</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Public Services & Online Transactions</h1>
+            <p class="page-subtitle">Access government services from the comfort of your home</p>
+        </div>
+    </section>
+
+    <!-- Services Navigation -->
+    <section class="services-nav-section">
+        <div class="container">
+            <div class="services-tabs">
+                <button class="tab-btn active" onclick="showService('business-permit')">Business Permit</button>
+                <button class="tab-btn" onclick="showService('cedula')">Community Tax Certificate</button>
+                <button class="tab-btn" onclick="showService('health')">Health Services</button>
+                <button class="tab-btn" onclick="showService('complaints')">File a Complaint</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service Forms -->
+    <section class="services-content">
+        <div class="container">
+            <!-- Business Permit Form -->
+            <div id="business-permit" class="service-panel active">
+                <div class="service-header">
+                    <h2>Business Permit Application</h2>
+                    <p>Apply for new or renew your business permit online</p>
+                </div>
+                <form class="service-form" onsubmit="submitForm(event, 'business-permit')">
+                    <div class="form-group">
+                        <label for="bp-type">Permit Type *</label>
+                        <select id="bp-type" required>
+                            <option value="">Select permit type</option>
+                            <option value="new">New Business Permit</option>
+                            <option value="renewal">Renewal</option>
+                            <option value="amendment">Amendment</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bp-business-name">Business Name *</label>
+                        <input type="text" id="bp-business-name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="bp-owner-name">Owner's Full Name *</label>
+                            <input type="text" id="bp-owner-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="bp-contact">Contact Number *</label>
+                            <input type="tel" id="bp-contact" pattern="[0-9]{11}" placeholder="09123456789" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bp-email">Email Address *</label>
+                        <input type="email" id="bp-email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bp-address">Business Address *</label>
+                        <textarea id="bp-address" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bp-nature">Nature of Business *</label>
+                        <select id="bp-nature" required>
+                            <option value="">Select business category</option>
+                            <option value="retail">Retail Trade</option>
+                            <option value="food">Food & Beverage</option>
+                            <option value="manufacturing">Manufacturing</option>
+                            <option value="services">Professional Services</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bp-notes">Additional Notes</label>
+                        <textarea id="bp-notes" rows="4" placeholder="Provide any additional information..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Submit Application</button>
+                        <button type="reset" class="btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Community Tax Certificate Form -->
+            <div id="cedula" class="service-panel">
+                <div class="service-header">
+                    <h2>Community Tax Certificate (Cedula)</h2>
+                    <p>Apply for your Community Tax Certificate online</p>
+                </div>
+                <form class="service-form" onsubmit="submitForm(event, 'cedula')">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ced-firstname">First Name *</label>
+                            <input type="text" id="ced-firstname" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ced-middlename">Middle Name</label>
+                            <input type="text" id="ced-middlename">
+                        </div>
+                        <div class="form-group">
+                            <label for="ced-lastname">Last Name *</label>
+                            <input type="text" id="ced-lastname" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ced-birthdate">Date of Birth *</label>
+                            <input type="date" id="ced-birthdate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ced-gender">Gender *</label>
+                            <select id="ced-gender" required>
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ced-address">Complete Address *</label>
+                        <textarea id="ced-address" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ced-occupation">Occupation *</label>
+                            <input type="text" id="ced-occupation" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ced-income">Annual Gross Income *</label>
+                            <input type="number" id="ced-income" min="0" step="0.01" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="ced-contact">Contact Number *</label>
+                            <input type="tel" id="ced-contact" pattern="[0-9]{11}" placeholder="09123456789" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ced-email">Email Address *</label>
+                            <input type="email" id="ced-email" required>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Submit Application</button>
+                        <button type="reset" class="btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Health Services Form -->
+            <div id="health" class="service-panel">
+                <div class="service-header">
+                    <h2>Health Services Appointment</h2>
+                    <p>Schedule an appointment for health consultations and services</p>
+                </div>
+                <form class="service-form" onsubmit="submitForm(event, 'health')">
+                    <div class="form-group">
+                        <label for="hs-service">Service Type *</label>
+                        <select id="hs-service" required>
+                            <option value="">Select service</option>
+                            <option value="consultation">Medical Consultation</option>
+                            <option value="immunization">Immunization</option>
+                            <option value="prenatal">Prenatal Care</option>
+                            <option value="dental">Dental Services</option>
+                            <option value="medical-cert">Medical Certificate</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hs-name">Full Name *</label>
+                            <input type="text" id="hs-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hs-age">Age *</label>
+                            <input type="number" id="hs-age" min="0" max="150" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="hs-date">Preferred Date *</label>
+                            <input type="date" id="hs-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="hs-time">Preferred Time *</label>
+                            <select id="hs-time" required>
+                                <option value="">Select time</option>
+                                <option value="08:00">8:00 AM</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="13:00">1:00 PM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hs-contact">Contact Number *</label>
+                        <input type="tel" id="hs-contact" pattern="[0-9]{11}" placeholder="09123456789" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hs-address">Complete Address *</label>
+                        <textarea id="hs-address" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hs-concern">Health Concern/Purpose *</label>
+                        <textarea id="hs-concern" rows="4" required></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Book Appointment</button>
+                        <button type="reset" class="btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Complaints Form -->
+            <div id="complaints" class="service-panel">
+                <div class="service-header">
+                    <h2>File a Complaint or Report</h2>
+                    <p>Report issues, concerns, or complaints to the city government</p>
+                </div>
+                <form class="service-form" onsubmit="submitForm(event, 'complaints')">
+                    <div class="form-group">
+                        <label for="comp-category">Complaint Category *</label>
+                        <select id="comp-category" required>
+                            <option value="">Select category</option>
+                            <option value="traffic">Traffic & Road Issues</option>
+                            <option value="garbage">Garbage & Sanitation</option>
+                            <option value="noise">Noise Pollution</option>
+                            <option value="illegal">Illegal Activities</option>
+                            <option value="public-safety">Public Safety</option>
+                            <option value="facilities">Public Facilities</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comp-subject">Subject/Title *</label>
+                        <input type="text" id="comp-subject" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comp-location">Location/Address *</label>
+                        <textarea id="comp-location" rows="2" placeholder="Specify the exact location of the issue" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comp-description">Detailed Description *</label>
+                        <textarea id="comp-description" rows="6" placeholder="Provide a detailed description of your complaint..." required></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="comp-name">Your Full Name *</label>
+                            <input type="text" id="comp-name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="comp-contact">Contact Number *</label>
+                            <input type="tel" id="comp-contact" pattern="[0-9]{11}" placeholder="09123456789" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comp-email">Email Address *</label>
+                        <input type="email" id="comp-email" required>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <input type="checkbox" id="comp-anonymous">
+                        <label for="comp-anonymous">File this complaint anonymously (your contact info will be kept confidential)</label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Submit Complaint</button>
+                        <button type="reset" class="btn-secondary">Clear Form</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content success-modal">
+            <div class="success-icon">✓</div>
+            <h2>Submission Successful!</h2>
+            <p id="successMessage"></p>
+            <button onclick="closeSuccessModal()" class="btn-primary">Close</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Bacoor City Government</h3>
+                    <p>Official website of the Local Government Unit of Bacoor, Cavite, Philippines</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Bacoor</a></li>
+                        <li><a href="departments.html">City Departments</a></li>
+                        <li><a href="services.html">Online Services</a></li>
+                        <li><a href="news.html">News & Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📍 Bacoor City Hall, Gov. D. Tirona St.</li>
+                        <li>📞 (046) 123-4567</li>
+                        <li>✉️ info@bacoor.gov.ph</li>
+                        <li>🕒 Mon-Fri: 8:00 AM - 5:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 City Government of Bacoor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../Script/script.js"></script>
+</body>
+</html>
