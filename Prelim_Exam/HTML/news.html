@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News & Announcements - Bacoor City LGU</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-brand">
+                    <div class="seal-container">
+                        <div class="seal-placeholder">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="50" cy="50" r="35" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M50 20 L55 35 L70 35 L58 45 L63 60 L50 50 L37 60 L42 45 L30 35 L45 35 Z" fill="currentColor"/>
+                                <text x="50" y="85" font-size="12" text-anchor="middle" fill="currentColor" font-weight="bold">BACOOR</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="brand-text">
+                        <h1>City of Bacoor</h1>
+                        <p class="tagline">Lungsod ng Bacoor • Ciudad ng Bacoor</p>
+                    </div>
+                </div>
+                <div class="header-search">
+                    <input type="text" id="headerSearch" placeholder="Search services, departments...">
+                    <button onclick="performSearch()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Bacoor</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="services.html">Public Services</a></li>
+                    <li><a href="news.html" class="active">News & Announcements</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">News & Announcements</h1>
+            <p class="page-subtitle">Stay updated with the latest from Bacoor City</p>
+        </div>
+    </section>
+
+    <!-- News Filter -->
+    <section class="news-filter-section">
+        <div class="container">
+            <div class="filter-bar">
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-type="all" onclick="filterNews('all')">All Updates</button>
+                    <button class="filter-btn" data-type="news" onclick="filterNews('news')">News</button>
+                    <button class="filter-btn" data-type="announcement" onclick="filterNews('announcement')">Announcements</button>
+                    <button class="filter-btn" data-type="advisory" onclick="filterNews('advisory')">Advisories</button>
+                    <button class="filter-btn" data-type="event" onclick="filterNews('event')">Events</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured News -->
+    <section class="featured-news-section">
+        <div class="container">
+            <div class="featured-news-card" onclick="openNewsModal('featured-1')">
+                <div class="featured-news-badge">Featured</div>
+                <div class="featured-news-content">
+                    <span class="news-category news-category-news">News</span>
+                    <h2 class="featured-news-title">Bacoor City Launches New Digital Services Platform</h2>
+                    <p class="featured-news-excerpt">Mayor Strike Revilla unveils comprehensive e-governance initiative to make government services more accessible to residents...</p>
+                    <div class="news-meta">
+                        <span class="news-date">📅 February 1, 2024</span>
+                        <span class="news-author">👤 Public Information Office</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="news-grid-section">
+        <div class="container">
+            <div class="news-grid" id="newsGrid">
+                <!-- News items will be loaded dynamically -->
+            </div>
+            
+            <div class="load-more">
+                <button onclick="loadMoreNews()" class="btn-secondary">Load More Articles</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Modal -->
+    <div id="newsModal" class="modal">
+        <div class="modal-content news-modal-content">
+            <span class="modal-close" onclick="closeNewsModal()">&times;</span>
+            <div id="newsModalBody"></div>
+        </div>
+    </div>
+
+    <!-- Announcements Sidebar -->
+    <section class="important-announcements">
+        <div class="container">
+            <h2 class="section-title">Important Reminders</h2>
+            <div class="announcements-list">
+                <div class="announcement-item" onclick="showAnnouncementModal('ann-1')">
+                    <div class="announcement-icon">⚠️</div>
+                    <div class="announcement-content">
+                        <h3>Scheduled Water Interruption</h3>
+                        <p>February 5-6, 2024 | Affected Areas: Barangays Molino I-VI</p>
+                    </div>
+                </div>
+                <div class="announcement-item" onclick="showAnnouncementModal('ann-2')">
+                    <div class="announcement-icon">🚧</div>
+                    <div class="announcement-content">
+                        <h3>Road Closure Advisory</h3>
+                        <p>Daang Hari Road repair works ongoing until February 15</p>
+                    </div>
+                </div>
+                <div class="announcement-item" onclick="showAnnouncementModal('ann-3')">
+                    <div class="announcement-icon">💉</div>
+                    <div class="announcement-content">
+                        <h3>Free Vaccination Program</h3>
+                        <p>City Health Office offers free vaccines for children and seniors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Bacoor City Government</h3>
+                    <p>Official website of the Local Government Unit of Bacoor, Cavite, Philippines</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Bacoor</a></li>
+                        <li><a href="departments.html">City Departments</a></li>
+                        <li><a href="services.html">Online Services</a></li>
+                        <li><a href="news.html">News & Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📍 Bacoor City Hall, Gov. D. Tirona St.</li>
+                        <li>📞 (046) 123-4567</li>
+                        <li>✉️ info@bacoor.gov.ph</li>
+                        <li>🕒 Mon-Fri: 8:00 AM - 5:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 City Government of Bacoor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../Script/script.js"></script>
+</body>
+</html>
