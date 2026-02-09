@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bacoor City - Official Local Government Unit Portal</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-brand">
+                    <div class="seal-container">
+                        <div class="seal-placeholder">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="50" cy="50" r="35" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M50 20 L55 35 L70 35 L58 45 L63 60 L50 50 L37 60 L42 45 L30 35 L45 35 Z" fill="currentColor"/>
+                                <text x="50" y="85" font-size="12" text-anchor="middle" fill="currentColor" font-weight="bold">BACOOR</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="brand-text">
+                        <h1>City of Bacoor</h1>
+                        <p class="tagline">Lungsod ng Bacoor • Ciudad ng Bacoor</p>
+                    </div>
+                </div>
+                <div class="header-search">
+                    <input type="text" id="headerSearch" placeholder="Search services, departments...">
+                    <button onclick="performSearch()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About Bacoor</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="services.html">Public Services</a></li>
+                    <li><a href="news.html">News & Announcements</a></li>
+                    
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="container">
+                <h2 class="hero-title">Welcome to Bacoor City</h2>
+                <p class="hero-subtitle">Building a Progressive Community Together</p>
+                <div class="hero-stats">
+                    <div class="stat-item fade-in-up" style="animation-delay: 0.1s">
+                        <div class="stat-number">700,000+</div>
+                        <div class="stat-label">Residents</div>
+                    </div>
+                    <div class="stat-item fade-in-up" style="animation-delay: 0.2s">
+                        <div class="stat-number">73</div>
+                        <div class="stat-label">Barangays</div>
+                    </div>
+                    <div class="stat-item fade-in-up" style="animation-delay: 0.3s">
+                        <div class="stat-number">52.4 km²</div>
+                        <div class="stat-label">Total Area</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Services -->
+    <section class="quick-services">
+        <div class="container">
+            <h2 class="section-title">Quick Access Services</h2>
+            <div class="services-grid">
+                <div class="service-card" onclick="window.location.href='services.html#business-permit'">
+                    <div class="service-icon">📋</div>
+                    <h3>Business Permit</h3>
+                    <p>Apply for new or renew business permits</p>
+                </div>
+                <div class="service-card" onclick="window.location.href='services.html#cedula'">
+                    <div class="service-icon">📄</div>
+                    <h3>Community Tax Certificate</h3>
+                    <p>Get your cedula online</p>
+                </div>
+                <div class="service-card" onclick="window.location.href='services.html#health'">
+                    <div class="service-icon">🏥</div>
+                    <h3>Health Services</h3>
+                    <p>Schedule appointments and consultations</p>
+                </div>
+                <div class="service-card" onclick="window.location.href='services.html#complaints'">
+                    <div class="service-icon">📢</div>
+                    <h3>File a Complaint</h3>
+                    <p>Report issues to city hall</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News -->
+    <section class="latest-news">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Latest Updates</h2>
+                <a href="news.html" class="view-all">View All News →</a>
+            </div>
+            <div class="news-feed" id="newsFeed">
+                <!-- News items will be dynamically loaded -->
+            </div>
+        </div>
+    </section>
+
+    <!-- City Highlights -->
+    <section class="city-highlights">
+        <div class="container">
+            <h2 class="section-title">City Highlights</h2>
+            <div class="highlights-grid">
+                <div class="highlight-card">
+                    <div class="highlight-image" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+                        <span class="highlight-icon">🏛️</span>
+                    </div>
+                    <div class="highlight-content">
+                        <h3>Historic Heritage</h3>
+                        <p>Rich in culture and history, Bacoor played a significant role in the Philippine Revolution</p>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-image" style="background: linear-gradient(135deg, #064e3b 0%, #10b981 100%);">
+                        <span class="highlight-icon">🌱</span>
+                    </div>
+                    <div class="highlight-content">
+                        <h3>Growing Economy</h3>
+                        <p>Thriving commercial and industrial sectors driving progress and development</p>
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <div class="highlight-image" style="background: linear-gradient(135deg, #7c2d12 0%, #f97316 100%);">
+                        <span class="highlight-icon">👨‍👩‍👧‍👦</span>
+                    </div>
+                    <div class="highlight-content">
+                        <h3>Vibrant Community</h3>
+                        <p>A diverse, welcoming community of over 700,000 residents</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Bacoor City Government</h3>
+                    <p>Official website of the Local Government Unit of Bacoor, Cavite, Philippines</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Bacoor</a></li>
+                        <li><a href="departments.html">City Departments</a></li>
+                        <li><a href="services.html">Online Services</a></li>
+                        <li><a href="news.html">News & Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📍 Bacoor City Hall, Gov. D. Tirona St.</li>
+                        <li>📞 (046) 123-4567</li>
+                        <li>✉️ info@bacoor.gov.ph</li>
+                        <li>🕒 Mon-Fri: 8:00 AM - 5:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 City Government of Bacoor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../Script/script.js"></script>
+</body>
+</html>
