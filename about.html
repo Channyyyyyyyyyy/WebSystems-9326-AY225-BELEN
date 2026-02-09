@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Bacoor City - Official LGU Portal</title>
+    <link rel="stylesheet" href="../CSS/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-brand">
+                    <div class="seal-container">
+                        <div class="seal-placeholder">
+                            <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="50" cy="50" r="35" stroke="currentColor" stroke-width="1.5"/>
+                                <path d="M50 20 L55 35 L70 35 L58 45 L63 60 L50 50 L37 60 L42 45 L30 35 L45 35 Z" fill="currentColor"/>
+                                <text x="50" y="85" font-size="12" text-anchor="middle" fill="currentColor" font-weight="bold">BACOOR</text>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="brand-text">
+                        <h1>City of Bacoor</h1>
+                        <p class="tagline">Lungsod ng Bacoor • Ciudad ng Bacoor</p>
+                    </div>
+                </div>
+                <div class="header-search">
+                    <input type="text" id="headerSearch" placeholder="Search services, departments...">
+                    <button onclick="performSearch()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="main-nav">
+            <div class="container">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About Bacoor</a></li>
+                    <li><a href="departments.html">Departments</a></li>
+                    <li><a href="services.html">Public Services</a></li>
+                    <li><a href="news.html">News & Announcements</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">About Bacoor City</h1>
+            <p class="page-subtitle">Discover our rich history, vision, and mission</p>
+        </div>
+    </section>
+
+    <!-- History Section -->
+    <section class="content-section">
+        <div class="container">
+            <div class="content-grid">
+                <div class="content-main">
+                    <h2 class="content-title">Our History</h2>
+                    <div class="text-content">
+                        <p>Bacoor, officially the City of Bacoor, is a 1st class component city in the province of Cavite, Philippines. According to the 2020 census, it has a population of 664,625 people, making it the 15th most populous city in the Philippines and the second largest city in the province of Cavite after Dasmariñas.</p>
+                        
+                        <p>The city's name is believed to have originated from "bakood," a Tagalog word meaning "fence" or "enclosure," which referred to the bamboo fences that surrounded early settlements in the area.</p>
+                        
+                        <p>Bacoor played a significant role in Philippine history, particularly during the Philippine Revolution. The Battle of Bacoor took place here on February 17, 1897, where Filipino revolutionaries under General Emilio Aguinaldo's command fought against Spanish colonial forces.</p>
+                        
+                        <p>From a primarily agricultural town, Bacoor has transformed into a highly urbanized area with thriving commercial and industrial sectors. On June 23, 2012, Bacoor was officially converted into a component city through Republic Act No. 10160, signed by President Benigno Aquino III.</p>
+                    </div>
+
+                    <h2 class="content-title">Vision</h2>
+                    <div class="vision-card">
+                        <div class="card-icon">👁️</div>
+                        <p>"A progressive, sustainable, and livable Bacoor where every citizen enjoys quality life, excellent services, and equal opportunities in a safe and peaceful community."</p>
+                    </div>
+
+                    <h2 class="content-title">Mission</h2>
+                    <div class="mission-card">
+                        <div class="card-icon">🎯</div>
+                        <ul class="mission-list">
+                            <li>To deliver efficient, transparent, and responsive public services to all residents</li>
+                            <li>To promote sustainable economic development and create livelihood opportunities</li>
+                            <li>To provide quality education, healthcare, and social services</li>
+                            <li>To ensure public safety and maintain peace and order</li>
+                            <li>To preserve and promote our cultural heritage and environmental resources</li>
+                            <li>To foster community participation in governance and development programs</li>
+                        </ul>
+                    </div>
+
+                    <h2 class="content-title">Core Values</h2>
+                    <div class="values-grid">
+                        <div class="value-card">
+                            <div class="value-icon">🤝</div>
+                            <h3>Integrity</h3>
+                            <p>Upholding honesty and strong moral principles in all government transactions</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">🎓</div>
+                            <h3>Excellence</h3>
+                            <p>Striving for the highest quality in public service delivery</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">💼</div>
+                            <h3>Accountability</h3>
+                            <p>Taking responsibility for our actions and decisions</p>
+                        </div>
+                        <div class="value-card">
+                            <div class="value-icon">🌟</div>
+                            <h3>Transparency</h3>
+                            <p>Operating openly and communicating clearly with citizens</p>
+                        </div>
+                    </div>
+                </div>
+
+                <aside class="content-sidebar">
+                    <div class="sidebar-card">
+                        <h3>Quick Facts</h3>
+                        <dl class="fact-list">
+                            <dt>Founded</dt>
+                            <dd>1671</dd>
+                            
+                            <dt>Cityhood</dt>
+                            <dd>June 23, 2012</dd>
+                            
+                            <dt>Land Area</dt>
+                            <dd>52.4 km²</dd>
+                            
+                            <dt>Population</dt>
+                            <dd>700,000+ (2024 est.)</dd>
+                            
+                            <dt>Barangays</dt>
+                            <dd>73</dd>
+                            
+                            <dt>Classification</dt>
+                            <dd>1st Class City</dd>
+                            
+                            <dt>Province</dt>
+                            <dd>Cavite</dd>
+                            
+                            <dt>Region</dt>
+                            <dd>CALABARZON (Region IV-A)</dd>
+                        </dl>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>City Officials</h3>
+                        <div class="official-card">
+                            <strong>City Mayor</strong>
+                            <p>Hon. Strike B. Revilla</p>
+                        </div>
+                        <div class="official-card">
+                            <strong>Vice Mayor</strong>
+                            <p>Hon. Rowena Bautista-Mendiola</p>
+                        </div>
+                        <a href="departments.html" class="btn-link">View All Officials →</a>
+                    </div>
+
+                    <div class="sidebar-card">
+                        <h3>Contact Information</h3>
+                        <ul class="contact-list">
+                            <li>
+                                <strong>Address:</strong><br>
+                                Bacoor City Hall<br>
+                                Gov. D. Tirona Street<br>
+                                Bacoor, Cavite
+                            </li>
+                            <li>
+                                <strong>Phone:</strong><br>
+                                (046) 123-4567
+                            </li>
+                            <li>
+                                <strong>Email:</strong><br>
+                                info@bacoor.gov.ph
+                            </li>
+                            <li>
+                                <strong>Office Hours:</strong><br>
+                                Monday - Friday<br>
+                                8:00 AM - 5:00 PM
+                            </li>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h3>Bacoor City Government</h3>
+                    <p>Official website of the Local Government Unit of Bacoor, Cavite, Philippines</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook">📘</a>
+                        <a href="#" aria-label="Twitter">🐦</a>
+                        <a href="#" aria-label="Instagram">📷</a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Bacoor</a></li>
+                        <li><a href="departments.html">City Departments</a></li>
+                        <li><a href="services.html">Online Services</a></li>
+                        <li><a href="news.html">News & Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li>📍 Bacoor City Hall, Gov. D. Tirona St.</li>
+                        <li>📞 (046) 123-4567</li>
+                        <li>✉️ info@bacoor.gov.ph</li>
+                        <li>🕒 Mon-Fri: 8:00 AM - 5:00 PM</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 City Government of Bacoor. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../Script/script.js"></script>
+</body>
+</html>
