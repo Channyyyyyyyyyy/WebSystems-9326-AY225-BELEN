@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Riot Games · Game Scraper · Official Theme</title>
+  <title>Epic Games · Action-Adventure · WebScraper</title>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
   <style>
-    /* Riot Games Theme - Red/Black/Gold */
     * {
       margin: 0;
       padding: 0;
@@ -15,126 +14,86 @@
     }
 
     body {
-      background: #0a0a0a;
-      font-family: 'Montserrat', 'Open Sans', sans-serif;
-      color: #ffffff;
+      background: #0b0d14;
+      font-family: 'Inter', sans-serif;
+      color: #edf2fb;
       line-height: 1.5;
-      background-image: radial-gradient(circle at 30% 10%, rgba(200, 0, 0, 0.05) 0%, transparent 30%),
-                        radial-gradient(circle at 80% 70%, rgba(200, 0, 0, 0.05) 0%, transparent 40%);
     }
 
     .container {
       max-width: 1600px;
       margin: 0 auto;
-      padding: 2rem 2rem 3rem;
-      position: relative;
+      padding: 2.2rem 1.8rem 3rem;
     }
 
-    /* Riot Games Logo Style Header */
     h1 {
-      font-weight: 800;
-      font-size: 2.5rem;
+      font-weight: 700;
+      font-size: 2.4rem;
       letter-spacing: -0.02em;
-      color: #ffffff;
+      background: linear-gradient(145deg, #ffffff, #b2ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       display: inline-block;
-      margin-bottom: 0.2rem;
-      text-transform: uppercase;
-      text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
-      position: relative;
-    }
-
-    h1::before {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, #ff0000, #ff6666, transparent);
-      border-radius: 2px;
-    }
-
-    h1 span {
-      color: #ff0000;
-      font-weight: 900;
+      margin-bottom: 0.4rem;
     }
 
     .genre-tag {
       display: inline-block;
-      background: #ff0000;
+      background: #26304a;
       font-size: 0.8rem;
-      font-weight: 700;
-      padding: 0.3rem 1.2rem;
-      border-radius: 4px;
+      font-weight: 600;
+      padding: 0.25rem 1.2rem;
+      border-radius: 40px;
       margin-left: 1rem;
-      letter-spacing: 0.5px;
-      color: #ffffff;
-      border: none;
-      text-transform: uppercase;
-      box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
+      letter-spacing: 0.3px;
+      color: #aac3ff;
+      border: 1px solid #3b4670;
     }
 
     .subhead {
-      color: #cccccc;
-      border-left: 4px solid #ff0000;
+      color: #9aaac7;
+      border-left: 4px solid #3d7eff;
       padding-left: 1.2rem;
       margin: 0.8rem 0 2rem;
-      font-size: 1.1rem;
-      font-weight: 300;
-      font-family: 'Open Sans', sans-serif;
+      font-size: 1.05rem;
     }
 
-    /* Riot-themed note */
     .note {
-      background: #1a1a1a;
-      border: 1px solid #ff0000;
-      border-radius: 8px;
-      padding: 1rem 2rem;
-      margin: 1.5rem 0;
-      color: #e0e0e0;
+      background: #1a2338;
+      border: 1px solid #3d7eff;
+      border-radius: 60px;
+      padding: 0.8rem 2rem;
+      margin: 1rem 0;
+      color: #b0c6ff;
       font-size: 0.9rem;
       display: flex;
       align-items: center;
-      gap: 1.2rem;
+      gap: 1rem;
       flex-wrap: wrap;
-      box-shadow: 0 4px 20px rgba(255, 0, 0, 0.1);
     }
-    .note strong { color: #ffffff; font-weight: 600; }
-    .note .highlight {
-      background: #ff0000;
-      color: #ffffff;
-      padding: 0.3rem 1rem;
-      border-radius: 4px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
+    .note strong { color: white; }
 
     .badge {
-      background: #ff0000;
-      color: #ffffff;
-      padding: 0.3rem 1.2rem;
-      border-radius: 4px;
+      background: #3d7eff;
+      color: white;
+      padding: 0.2rem 1rem;
+      border-radius: 30px;
       font-size: 0.8rem;
-      font-weight: 700;
-      border: none;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-weight: 600;
     }
 
-    /* Riot Games Scraper Panel */
     .scraper-panel {
-      background: #111111;
-      border: 1px solid #333333;
-      border-radius: 12px;
-      padding: 1.8rem 2.5rem;
+      background: #141a27;
+      border: 1px solid #2d3448;
+      border-radius: 3rem;
+      padding: 1.8rem 2.2rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
+      gap: 1.2rem;
       align-items: center;
       margin: 2rem 0 1.5rem;
-      box-shadow: 0 10px 30px -10px rgba(255, 0, 0, 0.2);
-      border-bottom: 3px solid #ff0000;
+      box-shadow: 0 16px 32px -12px #010314;
     }
 
     .url-field {
@@ -144,97 +103,76 @@
     .url-field label {
       display: block;
       font-size: 0.7rem;
-      font-weight: 700;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #ff6666;
-      margin-bottom: 0.4rem;
+      letter-spacing: 0.5px;
+      color: #8898c7;
+      margin-bottom: 0.3rem;
     }
 
     .url-wrapper {
       display: flex;
-      background: #222222;
-      border: 1px solid #444444;
-      border-radius: 8px;
-      padding: 0 0 0 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .url-wrapper:focus-within {
-      border-color: #ff0000;
-      box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
+      background: #0d101f;
+      border: 1.8px solid #2d344f;
+      border-radius: 60px;
+      padding: 0.1rem 0.1rem 0.1rem 1.8rem;
     }
 
     .url-wrapper input {
       background: transparent;
       border: none;
       width: 100%;
-      padding: 1rem 0.8rem;
-      color: #ffffff;
+      padding: 0.9rem 0.3rem;
+      color: white;
       outline: none;
       font-size: 0.95rem;
-      font-family: 'Open Sans', sans-serif;
-    }
-
-    .url-wrapper input::placeholder {
-      color: #666666;
-      font-weight: 300;
     }
 
     .scrape-btn {
-      background: #ff0000;
+      background: #3d7eff;
       border: none;
-      border-radius: 8px;
-      padding: 1rem 3rem;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #ffffff;
+      border-radius: 60px;
+      padding: 0.9rem 2.6rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: white;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 0.8rem;
-      transition: all 0.2s ease;
+      gap: 0.5rem;
+      box-shadow: 0 8px 22px #1e4fbf80;
+      transition: 0.15s;
       white-space: nowrap;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
-      border-bottom: 2px solid #990000;
     }
 
     .scrape-btn:hover {
-      background: #ff3333;
+      background: #5b90ff;
       transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 0, 0, 0.6);
     }
 
     .scrape-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
-      background: #660000;
-      transform: none;
-      box-shadow: none;
     }
 
-    /* Status - Riot Style */
     .status {
-      background: #1a1a1a;
-      border: 1px solid #ff0000;
-      border-radius: 8px;
-      padding: 1.2rem 2rem;
+      background: #1a212f;
+      border: 1px solid #2f3752;
+      border-radius: 60px;
+      padding: 1rem 2rem;
       margin: 1.2rem 0 2rem;
       display: flex;
       align-items: center;
       gap: 1rem;
       font-size: 0.95rem;
-      color: #ffffff;
-      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.1);
+      color: #ccd9fc;
     }
 
     .spinner {
       width: 1.2rem;
       height: 1.2rem;
-      border: 3px solid #ff6666;
-      border-top-color: #ff0000;
+      border: 3px solid #4d7eff;
+      border-top-color: transparent;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -243,75 +181,45 @@
       to { transform: rotate(360deg); }
     }
 
-    /* Progress - Riot Theme */
     .crawl-progress {
-      background: #111111;
-      border: 1px solid #333333;
-      border-radius: 12px;
-      padding: 1.5rem 2rem;
-      margin: 1rem 0 2rem;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-      border-left: 4px solid #ff0000;
-    }
-
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 0.8rem;
-      color: #ff9999;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      background: #141b2b;
+      border-radius: 60px;
+      padding: 1rem 2rem;
+      margin: 1rem 0;
+      border: 1px solid #2f3855;
     }
 
     .progress-bar {
       width: 100%;
       height: 8px;
-      background: #333333;
-      border-radius: 4px;
+      background: #1f2a45;
+      border-radius: 10px;
       overflow: hidden;
-      margin: 1rem 0;
+      margin: 0.5rem 0;
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, #ff0000, #ff6666);
+      background: linear-gradient(90deg, #3d7eff, #7aadff);
       transition: width 0.3s ease;
-      border-radius: 4px;
-      box-shadow: 0 0 10px #ff0000;
     }
 
-    .current-game {
-      font-size: 0.85rem;
-      color: #cccccc;
-      margin-top: 0.5rem;
-      font-family: 'Open Sans', sans-serif;
-    }
-
-    /* Stats Row - Riot Cards */
     .stats-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 1.5rem;
-      background: #111111;
-      border: 1px solid #333333;
-      border-radius: 12px;
-      padding: 1.8rem 2.5rem;
-      margin: 2rem 0;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-      border-top: 3px solid #ff0000;
+      gap: 1rem;
+      background: #141b2b;
+      border-radius: 3rem;
+      padding: 1.4rem 2.2rem;
+      margin: 2rem 0 2rem;
+      border: 1px solid #2f3855;
     }
 
     .stat-item {
       flex: 1 1 120px;
       text-align: center;
-      border-right: 1px solid #333333;
-      padding: 0 1.8rem;
-    }
-
-    .stat-item:first-child {
-      padding-left: 0;
+      border-right: 1px solid #2e3852;
+      padding: 0 0.8rem;
     }
 
     .stat-item:last-child {
@@ -320,96 +228,88 @@
 
     .stat-label {
       font-size: 0.7rem;
-      font-weight: 700;
-      color: #ff9999;
+      font-weight: 600;
+      color: #93a5da;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.3rem;
+      letter-spacing: 0.4px;
     }
 
     .stat-number {
-      font-size: 2.5rem;
-      font-weight: 800;
+      font-size: 2.2rem;
+      font-weight: 700;
       line-height: 1.2;
-      color: #ffffff;
-      text-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+      background: linear-gradient(145deg, #ffffff, #b8ceff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    /* Filter Bar */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 1.2rem;
-      background: #1a1a1a;
-      border: 1px solid #333333;
-      border-radius: 8px;
-      padding: 0.8rem 2rem;
+      gap: 1rem;
+      background: #141c2c;
+      border-radius: 60px;
+      padding: 0.7rem 2rem;
       margin: 1.2rem 0 2rem;
+      border: 1px solid #313d5e;
+    }
+
+    .filter-bar input,
+    .filter-bar select {
+      background: #0c1120;
+      border: 1.5px solid #2f3b60;
+      border-radius: 40px;
+      padding: 0.6rem 1.4rem;
+      color: white;
+      outline: none;
+      font-size: 0.9rem;
     }
 
     .filter-bar input {
-      background: #222222;
-      border: 1px solid #444444;
-      border-radius: 6px;
-      padding: 0.7rem 1.2rem;
-      color: #ffffff;
-      outline: none;
-      font-size: 0.9rem;
-      font-family: 'Open Sans', sans-serif;
       flex: 2 1 220px;
-      transition: all 0.2s ease;
     }
 
     .filter-bar input:focus {
-      border-color: #ff0000;
-      box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.2);
-    }
-
-    .filter-bar input::placeholder {
-      color: #666666;
-      font-style: italic;
+      border-color: #4d7eff;
     }
 
     .filter-count {
-      color: #ff9999;
+      color: #b0c6ff;
       font-size: 0.9rem;
       font-weight: 500;
       margin-left: auto;
-      background: #222222;
-      padding: 0.4rem 1.5rem;
-      border-radius: 4px;
-      border: 1px solid #444444;
+      background: #1f2844;
+      padding: 0.3rem 1.5rem;
+      border-radius: 40px;
     }
 
-    /* Table Header - Riot Style */
     .list-header {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 1rem 1.5rem;
-      background: #1a1a1a;
-      border: 1px solid #333333;
-      border-radius: 8px;
-      padding: 0.9rem 1.8rem;
-      margin-bottom: 0.8rem;
-      font-weight: 700;
-      font-size: 0.75rem;
+      background: #1b2337;
+      border-radius: 60px;
+      padding: 0.8rem 2rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid #3e4b7a;
+      font-weight: 600;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #ff9999;
-      border-bottom: 2px solid #ff0000;
+      letter-spacing: 0.5px;
+      color: #b6ccff;
     }
 
     .header-rank-title {
       display: flex;
       align-items: center;
       gap: 1.2rem;
-      min-width: 220px;
-      flex: 1.5 1 220px;
+      min-width: 230px;
+      flex: 2 1 260px;
       cursor: pointer;
       user-select: none;
-      transition: color 0.2s;
     }
 
     .header-rank-title:hover {
@@ -417,190 +317,190 @@
     }
 
     .sort-icon {
-      margin-left: 0.3rem;
-      font-size: 0.8rem;
-      opacity: 0.7;
+      margin-left: 0.5rem;
+      font-size: 0.9rem;
+      display: inline-block;
+      width: 18px;
+      text-align: center;
     }
 
     .header-rank-placeholder {
-      width: 2.5rem;
+      width: 2.4rem;
     }
 
-    /* Column Widths */
-    .col-release { width: 90px; }
-    .col-platform { width: 110px; }
-    .col-developer { width: 120px; }
-    .col-publisher { width: 120px; }
-    .col-genre { width: 100px; }
-    .col-desc { flex: 1.5 1 200px; }
+    .col-release { width: 100px; }
+    .col-developer { width: 130px; }
+    .col-publisher { width: 130px; }
+    .col-price { width: 90px; }
+    .col-platforms { width: 110px; }
+    .col-rating { width: 90px; }
+    .col-stock { width: 80px; }
+    .col-desc { flex: 2 1 200px; }
 
-    /* Game Rows - Riot Cards */
     .list-view {
       display: flex;
       flex-direction: column;
-      gap: 0.8rem;
+      gap: 0.9rem;
       margin: 1rem 0 2.5rem;
     }
 
     .list-row {
-      background: #151515;
-      border: 1px solid #333333;
-      border-radius: 8px;
-      padding: 0.9rem 1.8rem;
+      background: #121827;
+      border: 1px solid #2d344f;
+      border-radius: 50px;
+      padding: 0.9rem 2rem 0.9rem 2rem;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       gap: 1rem 1.5rem;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      transition: 0.2s;
     }
 
     .list-row:hover {
-      border-color: #ff0000;
-      background: #1d1d1d;
+      border-color: #5670b5;
+      background: #1a2338;
       transform: translateX(6px);
-      box-shadow: 0 8px 20px rgba(255, 0, 0, 0.15);
+      box-shadow: 0 12px 20px -12px #1f3a9e;
     }
 
     .rank-title {
       display: flex;
       align-items: center;
       gap: 1.2rem;
-      min-width: 220px;
-      flex: 1.5 1 220px;
+      min-width: 230px;
+      flex: 2 1 260px;
     }
 
     .rank {
-      width: 2.5rem;
-      height: 2.5rem;
-      background: #222222;
-      border-radius: 6px;
+      width: 2.4rem;
+      height: 2.4rem;
+      background: #202c48;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      color: #ff6666;
+      color: #aec3ff;
       font-size: 0.9rem;
-      border: 1px solid #ff0000;
-    }
-
-    .image-placeholder {
-      width: 45px;
-      height: 45px;
-      border-radius: 6px;
-      background: linear-gradient(135deg, #660000, #330000);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: #ff6666;
-      border: 1px solid #ff0000;
-      text-transform: uppercase;
+      border: 1px solid #3f5090;
     }
 
     .title-link {
       font-weight: 600;
-      font-size: 1rem;
-      color: #ffffff;
+      font-size: 1.1rem;
+      color: #f0f5ff;
       text-decoration: none;
       letter-spacing: -0.01em;
-      transition: color 0.2s;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 160px;
     }
 
     .title-link:hover {
-      color: #ff6666;
       text-decoration: underline;
-      text-underline-offset: 3px;
+      text-decoration-color: #4d7eff;
+      text-underline-offset: 4px;
+      color: #7aadff;
     }
 
-    /* Cell Styles */
-    .release-cell {
-      background: #222222;
-      border-radius: 4px;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.75rem;
-      color: #ffffff;
-      white-space: nowrap;
-      width: 90px;
-      text-align: center;
-      font-weight: 500;
-      border-left: 2px solid #ff0000;
-    }
-
-    .platform-cell {
-      background: #222222;
-      border: 1px solid #444444;
-      border-radius: 4px;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.7rem;
-      color: #cccccc;
-      white-space: nowrap;
-      width: 110px;
-      text-align: center;
-    }
-
-    .developer-cell, .publisher-cell {
-      background: #222222;
-      border-radius: 4px;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.75rem;
-      color: #ffffff;
-      white-space: nowrap;
-      width: 120px;
-      text-align: center;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      border-right: 2px solid #ff0000;
-    }
-
-    .genre-pill {
-      background: #330000;
-      border-radius: 4px;
+    .release-date {
+      background: #1f2a3f;
+      border-radius: 30px;
       padding: 0.3rem 1rem;
-      font-size: 0.75rem;
-      color: #ff9999;
-      border: none;
+      font-size: 0.8rem;
+      color: #b2c9ff;
+      border: 1px solid #3d5290;
       white-space: nowrap;
-      width: 100px;
-      text-align: center;
+    }
+
+    .developer {
+      background: #1e2742;
+      border-radius: 30px;
+      padding: 0.3rem 1.2rem;
+      font-size: 0.85rem;
+      color: #c9d6ff;
+      border: 1px solid #45599b;
+      white-space: nowrap;
+    }
+
+    .publisher {
+      background: #1c2542;
+      border-radius: 30px;
+      padding: 0.3rem 1.2rem;
+      font-size: 0.85rem;
+      color: #ccdcff;
+      border: 1px solid #38497a;
+      white-space: nowrap;
+    }
+
+    .price-pill {
+      background: linear-gradient(145deg, #1f2b47, #162036);
+      border-radius: 40px;
+      padding: 0.3rem 1.2rem;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-size: 0.9rem;
+      color: #c6dcff;
+      border: 1px solid #41599b;
+      white-space: nowrap;
+    }
+
+    .platform-badge {
+      background: #1e2a41;
+      border-radius: 30px;
+      padding: 0.3rem 1rem;
+      font-size: 0.8rem;
+      color: #b5d0ff;
+      border: 1px solid #3f5a9c;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .platform-icon {
+      font-size: 1rem;
+    }
+
+    .rating {
+      color: #ffb74d;
+      font-size: 0.9rem;
+      letter-spacing: 0.2em;
+      white-space: nowrap;
+      background: #1e2640;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+    }
+
+    .stock-badge {
+      font-size: 0.75rem;
+      background: #1f2a45;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      color: #aac2ff;
+      font-weight: 500;
+      border: 1px solid #3d5090;
     }
 
     .description-snip {
-      color: #b0b0b0;
-      font-size: 0.75rem;
-      flex: 1.5 1 200px;
+      color: #b2c6fa;
+      font-size: 0.85rem;
+      flex: 2 1 200px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      background: #222222;
+      background: #101725;
       padding: 0.3rem 1.2rem;
-      border-radius: 4px;
-      border: none;
-      font-family: 'Open Sans', sans-serif;
+      border-radius: 40px;
+      border: 1px solid #2e3b65;
     }
 
-    /* Empty State */
     .empty-state {
       text-align: center;
-      padding: 5rem 2rem;
-      background: #151515;
-      border: 1px solid #333333;
-      border-radius: 12px;
-      color: #ff9999;
-      font-weight: 400;
-      font-size: 1.1rem;
-      border-top: 3px solid #ff0000;
+      padding: 4rem 2rem;
+      background: #131b2d;
+      border-radius: 80px;
+      color: #8e9ed5;
+      font-weight: 500;
+      border: 1px dashed #44599b;
     }
 
-    /* Export Buttons - Riot Style */
     .export-bar {
       display: flex;
       justify-content: flex-end;
@@ -609,98 +509,64 @@
     }
 
     .btn-export {
-      background: #222222;
-      border: 1px solid #444444;
-      border-radius: 6px;
-      padding: 0.7rem 2rem;
-      color: #ffffff;
-      font-weight: 600;
+      background: #1d2643;
+      border: 1px solid #3a4780;
+      border-radius: 40px;
+      padding: 0.7rem 2.2rem;
+      color: #e5edff;
+      font-weight: 500;
       cursor: pointer;
-      transition: all 0.2s ease;
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      transition: 0.15s;
+      font-size: 0.9rem;
     }
 
     .btn-export:hover {
-      background: #ff0000;
-      border-color: #ff0000;
-      color: #ffffff;
+      background: #3d7eff;
+      border-color: #3d7eff;
+      color: white;
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
     }
 
-    /* Footer */
     footer {
-      color: #666666;
+      color: #4e6190;
       text-align: center;
       margin-top: 4rem;
-      border-top: 1px solid #333333;
+      border-top: 1px solid #1f2942;
       padding-top: 2rem;
-      font-size: 0.85rem;
-      font-weight: 300;
+      font-size: 0.9rem;
     }
 
-    footer i {
-      color: #ff0000;
-      margin: 0 0.3rem;
-    }
-
-    /* Scrollbar - Riot Theme */
-    ::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: #1a1a1a;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: #ff0000;
-      border-radius: 5px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: #ff6666;
-    }
-
-    /* Selection Color */
-    ::selection {
-      background: #ff0000;
-      color: #ffffff;
+    .url-debug {
+      font-size: 0.7rem;
+      color: #8898c7;
+      margin-top: 0.3rem;
+      word-break: break-all;
     }
   </style>
 </head>
 <body>
 <div class="container">
-  <!-- header with Riot Games branding -->
+  <!-- header -->
   <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-    <h1><span>RIOT</span> GAMES · SCRAPER</h1>
-    <span class="genre-tag">MAX 10 GAMES</span>
+    <h1>Epic Games · Fixed URL Handler and WebScraper</h1>
+    <span class="genre-tag">no more /nl/ errors</span>
   </div>
-  <div class="subhead">⚡ OFFICIAL GAME SCRAPER · ONLY REAL GAMES · NO FABRICATED DATA</div>
 
-  <!-- note about game-only scraping -->
+  <!-- note about URL fixing -->
   <div class="note">
-    <span class="badge">🎮 GAME ONLY</span>
-    <span><strong>STRICT FILTERING:</strong> Only actual game pages are scraped</span>
-    <span class="highlight">MAX 10 GAMES</span>
-    <span>If fewer than 10 exist, only real games are shown</span>
+    <span class="badge">🔧 URL FIXER</span>
+    <span><strong>Fixed:</strong> Converts <code>/nl/p/space-wolf-2-d10986</code> → <code>https://store.epicgames.com/p/space-wolf-2</code></span>
   </div>
 
   <!-- scraper panel -->
   <div class="scraper-panel">
     <div class="url-field">
-      <label>RIOT GAMES MAIN URL</label>
+      <label>ACTION-ADVENTURE CATEGORY URL</label>
       <div class="url-wrapper">
-        <input type="url" id="urlInput" value="https://www.riotgames.com/en" placeholder="https://www.riotgames.com/en">
+        <input type="url" id="urlInput" value="https://store.epicgames.com/en-US/c/action-adventure-games?sortBy=releaseDate&sortDir=DESC&count=30" placeholder="epic games category url">
       </div>
     </div>
-    <button class="scrape-btn" id="scrapeBtn"><span>⚡</span> SCRAPE GAMES</button>
+    <button class="scrape-btn" id="scrapeBtn"><span>⟳</span> SCRAPE GAMES</button>
   </div>
 
   <!-- status -->
@@ -708,65 +574,70 @@
 
   <!-- crawl progress -->
   <div id="crawlProgress" class="crawl-progress" style="display: none;">
-    <div class="progress-header">
-      <span>🔍 FINDING GAMES: <span id="discoveredCount">0</span> FOUND</span>
-      <span>📥 PROCESSING: <span id="scrapedCount">0</span>/<span id="totalToScrape">0</span></span>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+      <span>🔍 Discovering games: <span id="discoveredCount">0</span> found</span>
+      <span>📥 Scraping: <span id="scrapedCount">0</span>/<span id="totalToScrape">0</span></span>
     </div>
     <div class="progress-bar">
       <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
     </div>
-    <div class="current-game" id="currentGame">READY TO START...</div>
+    <div style="font-size: 0.8rem; color: #93a5da; margin-top: 0.3rem;" id="currentGame">Ready to start...</div>
   </div>
 
-  <!-- stats row - only shown if games found -->
+  <!-- stats row -->
   <div class="stats-row" id="statsRow" style="display: none;">
-    <div class="stat-item"><span class="stat-label">GAMES FOUND</span><div class="stat-number" id="statTotal">0</div></div>
-    <div class="stat-item"><span class="stat-label">MAX ALLOWED</span><div class="stat-number">10</div></div>
-    <div class="stat-item"><span class="stat-label">SHOWN</span><div class="stat-number" id="statShown">0</div></div>
+    <div class="stat-item"><span class="stat-label">games found</span><div class="stat-number" id="statTotal">0</div></div>
+    <div class="stat-item"><span class="stat-label">free games</span><div class="stat-number" id="statFree">0</div></div>
+    <div class="stat-item"><span class="stat-label">discounted</span><div class="stat-number" id="statDiscounted">0</div></div>
   </div>
 
-  <!-- filter bar - only shown if games found -->
+  <!-- filter bar -->
   <div class="filter-bar" id="filterBar" style="display: none;">
-    <input type="text" id="searchFilter" placeholder=" Search specific game?...">
+    <input type="text" id="searchFilter" placeholder=" filter by title, dev, publisher...">
+    <select id="priceFilter">
+      <option value="">any price</option>
+      <option value="paid">paid only</option>
+      <option value="free">free only</option>
+    </select>
     <span class="filter-count" id="filterCount">0/0</span>
   </div>
 
-  <!-- headers - only shown if games found -->
+  <!-- headers -->
   <div class="list-header" id="listHeader" style="display: none;">
     <div class="header-rank-title" id="sortByTitleBtn">
       <span class="header-rank-placeholder"></span>
-      <span>🎮 GAME</span>
+      <span>🎮 TITLE (click to open store)</span>
       <span class="sort-icon" id="titleSortIcon">↕️</span>
     </div>
     <span class="col-release">📅 RELEASE</span>
-    <span class="col-platform">💻 PLATFORM</span>
-    <span class="col-developer">👨‍💻 DEV</span>
-    <span class="col-publisher">🏢 PUB</span>
-    <span class="col-genre">🎯 GENRE</span>
-    <span class="col-desc">📄 DESCRIPTION</span>
+    <span class="col-developer">👨‍💻 DEVELOPER</span>
+    <span class="col-publisher">🏢 PUBLISHER</span>
+    <span class="col-price">💰 PRICE</span>
+    <span class="col-platforms">🖥️ PLATFORM</span>
+    <span class="col-rating">⭐ RATING</span>
+    <span class="col-stock">📦 STOCK</span>
+    <span class="col-desc">📄 GENRE</span>
   </div>
 
   <!-- list container -->
   <div id="listContainer" class="list-view"></div>
 
-  <!-- export - only shown if games found -->
+  <!-- export -->
   <div class="export-bar" id="exportBar" style="display: none;">
     <button class="btn-export" id="exportCsvBtn">⬇ CSV</button>
     <button class="btn-export" id="exportJsonBtn">⬇ JSON</button>
   </div>
 
-  <footer>⚡ RIOT GAMES OFFICIAL THEME · ONLY REAL GAMES · MAX 10 · NO FABRICATED DATA ⚡</footer>
+  <footer>🔧 URL fixer removes language codes (/nl/, /en-US/) and cleans game page URLs</footer>
 </div>
 
 <script>
-  // (JavaScript remains exactly the same - unchanged)
   (function() {
     // --- STATE ---
     let allGames = [];
     let filteredGames = [];
     let titleSortOrder = null;
     let isCrawling = false;
-    const MAX_GAMES = 10;
 
     // DOM elements
     const urlInput = document.getElementById('urlInput');
@@ -774,9 +645,11 @@
     const statusDiv = document.getElementById('status');
     const statsRow = document.getElementById('statsRow');
     const statTotal = document.getElementById('statTotal');
-    const statShown = document.getElementById('statShown');
+    const statFree = document.getElementById('statFree');
+    const statDiscounted = document.getElementById('statDiscounted');
     const filterBar = document.getElementById('filterBar');
     const searchFilter = document.getElementById('searchFilter');
+    const priceFilter = document.getElementById('priceFilter');
     const filterCount = document.getElementById('filterCount');
     const listContainer = document.getElementById('listContainer');
     const exportBar = document.getElementById('exportBar');
@@ -810,7 +683,7 @@
 
     function setStatus(type, msg) {
       statusDiv.style.display = 'flex';
-      statusDiv.style.background = type === 'error' ? '#330000' : '#1a1a1a';
+      statusDiv.style.background = type === 'error' ? '#2a1e2a' : '#1a212f';
       if (type === 'loading') {
         statusDiv.innerHTML = `<span class="spinner"></span> ${msg}`;
       } else if (type === 'error') {
@@ -824,227 +697,92 @@
       return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]); 
     }
 
-    // --- Extract domain and clean URL ---
-    function getFullUrl(href, baseUrl) {
-      if (!href) return null;
-      if (href.startsWith('http')) return href;
-      if (href.startsWith('/')) {
+    // --- IMPROVED URL FIXER FUNCTION ---
+    function fixEpicGamesUrl(url) {
+      // If it's already a valid absolute URL, clean it
+      if (url.startsWith('http')) {
         try {
-          const urlObj = new URL(baseUrl);
-          return `${urlObj.protocol}//${urlObj.hostname}${href}`;
-        } catch {
-          return `https://www.riotgames.com${href}`;
-        }
-      }
-      return null;
-    }
-
-    // --- Check if this is ACTUALLY a game page (strict detection) ---
-    function isGamePage(url, text, surroundingText) {
-      const urlLower = url.toLowerCase();
-      const textLower = text.toLowerCase();
-      const surroundingLower = surroundingText.toLowerCase();
-      
-      // Must be from a game domain
-      const gameDomains = [
-        'leagueoflegends.com',
-        'playvalorant.com',
-        'playruneterra.com',
-        'wildrift.leagueoflegends.com',
-        'teamfighttactics.leagueoflegends.com',
-        'ruinedking.com',
-        'hextechmayhem.com',
-        'convrgencegame.com',
-        'songofnunu.com',
-        'mageseeker.com',
-        '2xko.riotgames.com'
-      ];
-      
-      const isGameDomain = gameDomains.some(domain => urlLower.includes(domain));
-      
-      // Check URL patterns that indicate games
-      const hasGamePath = urlLower.includes('/game/') || 
-                          urlLower.includes('/games/') ||
-                          urlLower.includes('/our-games/');
-      
-      // Check for game names in text
-      const gameNames = ['league of legends', 'lol', 'valorant', 'tft', 'teamfight tactics', 
-                        'legends of runeterra', 'wild rift', 'ruined king', 'hextech mayhem',
-                        'convergence', 'song of nunu', 'mageseeker', '2xko', 'project l',
-                        'arcane', 'fighting game', 'rpg', 'moba', 'shooter'];
-      
-      const hasGameName = gameNames.some(name => textLower.includes(name) || surroundingLower.includes(name));
-      
-      // Specific game identifiers
-      const isSpecificGame = 
-        urlLower.includes('leagueoflegends') && !urlLower.includes('news') ||
-        urlLower.includes('playvalorant') ||
-        urlLower.includes('playruneterra') ||
-        urlLower.includes('wildrift') ||
-        urlLower.includes('ruinedking') ||
-        urlLower.includes('hextechmayhem') ||
-        urlLower.includes('convrgence') ||
-        urlLower.includes('songofnunu') ||
-        urlLower.includes('mageseeker') ||
-        urlLower.includes('2xko');
-      
-      // Exclude news and articles
-      const isNews = urlLower.includes('/news/') || 
-                     urlLower.includes('/article/') ||
-                     urlLower.includes('/updates/') ||
-                     urlLower.includes('/blog/') ||
-                     textLower.includes('news') ||
-                     textLower.includes('article') ||
-                     textLower.includes('patch notes');
-      
-      // Exclude support and legal pages
-      const isExcluded = urlLower.includes('/support/') ||
-                         urlLower.includes('/legal/') ||
-                         urlLower.includes('/privacy/') ||
-                         urlLower.includes('/terms/') ||
-                         urlLower.includes('/contact/') ||
-                         urlLower.includes('/about/');
-      
-      return (isGameDomain || isSpecificGame || (hasGamePath && hasGameName)) && !isNews && !isExcluded;
-    }
-
-    // --- Extract genre from game page ---
-    function extractGenre(text, url) {
-      const textLower = text.toLowerCase();
-      const urlLower = url.toLowerCase();
-      
-      if (urlLower.includes('valorant') || textLower.includes('tactical shooter') || textLower.includes('fps')) return 'Tactical Shooter';
-      if (urlLower.includes('tft') || urlLower.includes('teamfight') || textLower.includes('auto battler')) return 'Auto Battler';
-      if (urlLower.includes('runeterra') || textLower.includes('card game')) return 'Card Game';
-      if (urlLower.includes('2xko') || urlLower.includes('project l') || textLower.includes('fighting')) return 'Fighting';
-      if (textLower.includes('rpg') || textLower.includes('role playing')) return 'RPG';
-      if (textLower.includes('moba') || urlLower.includes('leagueoflegends')) return 'MOBA';
-      if (textLower.includes('platformer')) return 'Platformer';
-      if (textLower.includes('adventure')) return 'Adventure';
-      
-      return 'Game';
-    }
-
-    // --- Extract platform from game page ---
-    function extractPlatform(text) {
-      const textLower = text.toLowerCase();
-      const platforms = [];
-      
-      if (textLower.includes('pc') || textLower.includes('windows')) platforms.push('PC');
-      if (textLower.includes('mac') || textLower.includes('macos')) platforms.push('Mac');
-      if (textLower.includes('ios') || textLower.includes('iphone') || textLower.includes('ipad')) platforms.push('iOS');
-      if (textLower.includes('android')) platforms.push('Android');
-      if (textLower.includes('playstation') || textLower.includes('ps4') || textLower.includes('ps5')) platforms.push('PlayStation');
-      if (textLower.includes('xbox')) platforms.push('Xbox');
-      if (textLower.includes('switch') || textLower.includes('nintendo')) platforms.push('Switch');
-      if (textLower.includes('console')) platforms.push('Console');
-      
-      // Default to PC if no platforms found (most Riot games are on PC)
-      return platforms.length > 0 ? [...new Set(platforms)] : ['PC'];
-    }
-
-    // --- NEW: Extract release date ---
-    function extractReleaseDate(text, url) {
-      const textLower = text.toLowerCase();
-      
-      // Look for common date patterns
-      const datePatterns = [
-        /released?\s*(?:on)?\s*(\d{4})/i,
-        /(\d{4})\s*release/i,
-        /release\s*date:?\s*(\d{4})/i,
-        /launched?\s*(?:in)?\s*(\d{4})/i
-      ];
-      
-      for (const pattern of datePatterns) {
-        const match = textLower.match(pattern);
-        if (match && match[1]) {
-          return match[1];
+          const urlObj = new URL(url);
+          // Remove language codes like /en-US/, /fr/, etc.
+          let pathname = urlObj.pathname.replace(/\/[a-z]{2}(-[A-Z]{2})?\//, '/');
+          
+          // Remove trailing IDs like -d10986, -p1234, etc. but keep the game name
+          pathname = pathname.replace(/-[a-z]\d+$/, '');
+          
+          // Ensure it has /p/ in the path
+          if (!pathname.includes('/p/') && !pathname.includes('/product/')) {
+            // Extract the game name from the path
+            const parts = pathname.split('/').filter(p => p);
+            if (parts.length > 0) {
+              const gameName = parts[parts.length - 1].replace(/-\d+$/, '');
+              pathname = `/p/${gameName}`;
+            }
+          }
+          
+          // Remove any double slashes
+          pathname = pathname.replace(/\/+/g, '/');
+          
+          return `https://store.epicgames.com${pathname}`;
+        } catch (e) {
+          return url;
         }
       }
       
-      // Check for specific game release years (known Riot games)
-      if (url.includes('leagueoflegends') && !url.includes('wildrift')) return '2009';
-      if (url.includes('valorant')) return '2020';
-      if (url.includes('tft') || url.includes('teamfight')) return '2019';
-      if (url.includes('runeterra')) return '2020';
-      if (url.includes('wildrift')) return '2020';
-      if (url.includes('ruinedking')) return '2021';
-      if (url.includes('hextechmayhem')) return '2021';
-      if (url.includes('convrgence')) return '2023';
-      if (url.includes('songofnunu')) return '2023';
-      if (url.includes('mageseeker')) return '2023';
-      if (url.includes('2xko')) return 'TBA';
+      // Handle relative URLs
+      // Remove language codes like /nl/, /en-US/, /fr/, /de/, etc.
+      let cleanPath = url.replace(/^\/[a-z]{2}(-[A-Z]{2})?\//, '/');
       
-      return 'Not Available';
-    }
-
-    // --- NEW: Extract developer information ---
-    function extractDeveloper(text, url) {
-      const textLower = text.toLowerCase();
+      // Remove trailing IDs like -d10986, -p1234, etc. but keep the game name
+      cleanPath = cleanPath.replace(/-[a-z]\d+$/, '');
       
-      // Look for developer mentions
-      const devPatterns = [
-        /developed\s+by\s+([^,.]+)/i,
-        /developer:?\s*([^,.]+)/i,
-        /creation\s+by\s+([^,.]+)/i
-      ];
-      
-      for (const pattern of devPatterns) {
-        const match = textLower.match(pattern);
-        if (match && match[1]) {
-          return match[1].trim();
+      // Extract just the game name if the path is too complex
+      const gameMatch = cleanPath.match(/\/(?:p|product)\/([^\/?#]+)/);
+      if (gameMatch) {
+        const gameName = gameMatch[1].replace(/-\d+$/, '');
+        cleanPath = `/p/${gameName}`;
+      } else {
+        // Try to extract any potential game name
+        const nameMatch = cleanPath.match(/\/([^\/?#]+)(?:\/|$)/);
+        if (nameMatch) {
+          const gameName = nameMatch[1].replace(/-\d+$/, '');
+          cleanPath = `/p/${gameName}`;
         }
       }
       
-      // Riot Games developed most of their own games
-      if (url.includes('riotgames.com') || 
-          url.includes('leagueoflegends.com') || 
-          url.includes('playvalorant.com') ||
-          url.includes('playruneterra.com') ||
-          url.includes('wildrift')) {
-        return 'Riot Games';
-      }
+      // Remove any double slashes
+      cleanPath = cleanPath.replace(/\/+/g, '/');
       
-      // Third-party developers for some games
-      if (url.includes('ruinedking') || url.includes('hextechmayhem') || 
-          url.includes('convrgence') || url.includes('songofnunu') || 
-          url.includes('mageseeker')) {
-        return 'Airship / Digital Sun';
-      }
-      
-      return 'Not Available';
+      return `https://store.epicgames.com${cleanPath}`;
     }
 
-    // --- NEW: Extract publisher information ---
-    function extractPublisher(text, url) {
-      const textLower = text.toLowerCase();
-      
-      // Look for publisher mentions
-      const pubPatterns = [
-        /published\s+by\s+([^,.]+)/i,
-        /publisher:?\s*([^,.]+)/i
-      ];
-      
-      for (const pattern of pubPatterns) {
-        const match = textLower.match(pattern);
-        if (match && match[1]) {
-          return match[1].trim();
+    // --- NEW FUNCTION TO VALIDATE IF URL IS A GAME PAGE ---
+    function isValidGameUrl(url) {
+      try {
+        const urlObj = new URL(url);
+        // Must be from Epic Games store
+        if (!urlObj.hostname.includes('store.epicgames.com')) {
+          return false;
         }
+        
+        // Must have /p/ or /product/ in path
+        if (!urlObj.pathname.includes('/p/') && !urlObj.pathname.includes('/product/')) {
+          return false;
+        }
+        
+        // Avoid common non-game paths
+        const excludedPaths = ['/browse', '/collection', '/category', '/news', '/about', '/support'];
+        for (const path of excludedPaths) {
+          if (urlObj.pathname.includes(path)) {
+            return false;
+          }
+        }
+        
+        // Path should have a reasonable length for a game name
+        const gamePart = urlObj.pathname.split('/').pop() || '';
+        return gamePart.length > 3 && !gamePart.includes('?') && !gamePart.includes('#');
+      } catch {
+        return false;
       }
-      
-      // Riot Games publishes most of their games
-      if (url.includes('riotgames.com') || 
-          url.includes('leagueoflegends.com') || 
-          url.includes('playvalorant.com')) {
-        return 'Riot Games';
-      }
-      
-      // Some games might have different publishers
-      if (url.includes('ruinedking') || url.includes('hextechmayhem')) {
-        return 'Riot Forge';
-      }
-      
-      return 'Riot Games';
     }
 
     // --- Fetch with fallback ---
@@ -1065,128 +803,195 @@
       throw new Error(`All proxies failed:\n${errors.join('\n')}`);
     }
 
-    // --- Discover ONLY game links from Riot Games page ---
-    async function discoverRiotGames() {
-      setStatus('loading', '🔍 Scanning for games on Riot Games website...');
+    // --- Discover game links with improved URL handling ---
+    async function discoverGameLinks() {
+      setStatus('loading', '🔍 Discovering game links...');
+      const html = await fetchWithFallback(urlInput.value);
+      const doc = new DOMParser().parseFromString(html, 'text/html');
       
-      try {
-        const html = await fetchWithFallback(urlInput.value);
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        
-        // Find all links on the page
-        const links = doc.querySelectorAll('a[href]');
-        const gameLinks = new Map(); // Use Map to avoid duplicates
-        
-        links.forEach(link => {
-          const href = link.getAttribute('href');
-          const linkText = link.textContent.trim();
-          const parentText = link.parentElement?.textContent.trim() || '';
-          const surroundingText = (linkText + ' ' + parentText).substring(0, 300);
+      const links = new Set();
+      const validLinks = [];
+      
+      // Multiple selectors to find game links - prioritized
+      const selectors = [
+        'a[href*="/p/"][href*="store.epicgames.com"]',
+        'a[href*="/product/"][href*="store.epicgames.com"]',
+        'a[data-testid="offer-card"]',
+        'a[class*="card"]',
+        'div[class*="card"] a[href*="/"]',
+        'a[href*="/p/"]',  // More general selectors after specific ones
+        'a[href*="/product/"]'
+      ];
+
+      // First pass: use specific selectors
+      for (const selector of selectors) {
+        const elements = doc.querySelectorAll(selector);
+        elements.forEach(el => {
+          let href = el.href || el.getAttribute('href');
+          if (!href) return;
           
-          // Get full URL
-          const fullUrl = getFullUrl(href, urlInput.value);
-          if (!fullUrl) return;
-          
-          // Strict check: only actual game pages
-          if (isGamePage(fullUrl, linkText, surroundingText)) {
-            // Create a unique key based on URL to avoid duplicates
-            if (!gameLinks.has(fullUrl)) {
-              gameLinks.set(fullUrl, {
-                url: fullUrl,
-                text: linkText || 'Riot Game',
-                context: surroundingText
-              });
+          try {
+            let fullUrl;
+            if (href.startsWith('/')) {
+              fullUrl = fixEpicGamesUrl(href);
+            } else {
+              fullUrl = fixEpicGamesUrl(href); // Always use our fixer
             }
+            
+            if (isValidGameUrl(fullUrl) && !links.has(fullUrl)) {
+              links.add(fullUrl);
+              validLinks.push(fullUrl);
+            }
+          } catch (e) {
+            console.warn('Invalid URL:', href);
           }
         });
-        
-        // Convert Map to array and limit to MAX_GAMES
-        const games = Array.from(gameLinks.values());
-        console.log(`Found ${games.length} potential games:`, games);
-        
-        // Return up to MAX_GAMES (don't exceed limit)
-        return games.slice(0, MAX_GAMES);
-        
-      } catch (err) {
-        console.error('Error discovering games:', err);
-        throw err;
       }
+
+      // Second pass: look for any text that might be game links
+      if (validLinks.length < 20) {
+        const allLinks = doc.querySelectorAll('a[href]');
+        allLinks.forEach(a => {
+          const href = a.getAttribute('href');
+          const text = a.textContent.trim();
+          if (!href || href.startsWith('#')) return;
+          
+          // If it has game-like text and looks like a game URL
+          if (text.length > 3 && text.length < 50 && 
+              (href.includes('/p/') || href.includes('/product/') || 
+               href.match(/\/([^\/]+-){1,}[^\/]+/))) {
+            try {
+              const fullUrl = fixEpicGamesUrl(href);
+              if (isValidGameUrl(fullUrl) && !links.has(fullUrl)) {
+                links.add(fullUrl);
+                validLinks.push(fullUrl);
+              }
+            } catch (e) {}
+          }
+        });
+      }
+
+      console.log('Discovered game links:', validLinks);
+      
+      // Return first 20 valid links
+      return validLinks.slice(0, 10);
     }
 
-    // --- Extract detailed information from a game page (UPDATED with new fields) ---
-    async function scrapeGamePage(game) {
-      try {
-        setStatus('loading', `📄 Scraping: ${game.text || 'Game page'}...`);
-        
-        const html = await fetchWithFallback(game.url);
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        
-        // Extract title
-        let title = game.text || 'Riot Game';
-        const titleEl = doc.querySelector('h1') || doc.querySelector('title');
-        if (titleEl) {
-          title = titleEl.textContent.trim();
-        }
-        
-        // Extract description
-        let description = '';
-        const metaDesc = doc.querySelector('meta[name="description"]') || doc.querySelector('meta[property="og:description"]');
-        if (metaDesc) {
-          description = metaDesc.getAttribute('content') || '';
-        }
-        
-        if (!description) {
-          const firstP = doc.querySelector('p');
-          if (firstP) {
-            description = firstP.textContent.trim();
+    // --- CHECK IF PAGE IS ACTUAL GAME PAGE (NOT 404) ---
+    function isGamePage(doc) {
+      // Check for 404 indicators
+      const bodyText = doc.body.textContent.toLowerCase();
+      if (bodyText.includes('page not found') || 
+          bodyText.includes('404') ||
+          bodyText.includes('this page could not be found') ||
+          bodyText.includes('sorry, we couldn\'t find that page')) {
+        return false;
+      }
+      
+      // Check for game title element
+      const titleEl = doc.querySelector('h1[data-testid="product-title"], h1, .product-title');
+      if (!titleEl || titleEl.textContent.trim().length === 0) {
+        return false;
+      }
+      
+      return true;
+    }
+
+    // --- Extract game data from individual page ---
+    function extractGameData(doc, pageUrl) {
+      const getText = (selectors) => {
+        for (let sel of selectors) {
+          const el = doc.querySelector(sel);
+          if (el && el.textContent.trim()) {
+            return el.textContent.trim().replace(/\s+/g, ' ');
           }
         }
-        
-        // Truncate description
-        if (description.length > 100) {
-          description = description.substring(0, 100) + '…';
-        }
-        
-        // Get all text for analysis
-        const bodyText = doc.body.textContent || '';
-        const fullText = bodyText + ' ' + title;
-        
-        // Extract game details
-        const genre = extractGenre(fullText, game.url);
-        const platforms = extractPlatform(fullText);
-        const releaseDate = extractReleaseDate(fullText, game.url);
-        const developer = extractDeveloper(fullText, game.url);
-        const publisher = extractPublisher(fullText, game.url);
-        
+        return null;
+      };
+
+      // Check if this is a valid game page
+      const isValid = isGamePage(doc);
+      
+      // Title
+      let title = getText(['h1[data-testid="product-title"]', 'h1', '.product-title']);
+      if (!title) {
+        const match = pageUrl.match(/\/([^\/]+?)\/?$/);
+        title = match ? match[1].replace(/-/g, ' ') : 'Unknown Game';
+      }
+      
+      // If page is invalid, mark as such
+      if (!isValid) {
         return {
-          title: title,
-          url: game.url,
-          genre: genre,
-          platforms: platforms,
-          releaseDate: releaseDate,
-          developer: developer,
-          publisher: publisher,
-          description: description || 'Riot Games title',
-          found: true
-        };
-        
-      } catch (err) {
-        console.warn(`Failed to scrape ${game.url}:`, err);
-        
-        // Return basic info only (no fabricated data)
-        return {
-          title: game.text || 'Riot Game',
-          url: game.url,
-          genre: 'Game',
-          platforms: ['PC'],
+          title: `⚠️ ${title} (Page Not Found)`,
+          price: 'Not Available',
+          priceNumeric: 0,
           releaseDate: 'Not Available',
           developer: 'Not Available',
           publisher: 'Not Available',
-          description: 'Game page - details unavailable',
-          found: true,
-          failed: true
+          rating: 'Not Available',
+          description: 'Game page could not be loaded',
+          link: pageUrl,
+          inStock: false,
+          isDiscounted: false,
+          platforms: ['Unknown'],
+          isValid: false
         };
       }
+
+      // Price
+      let priceText = 'Not Available';
+      let priceNum = 0;
+      const priceEl = getText(['span[data-testid="price"]', '.price', '[class*="price"]']);
+      if (priceEl) {
+        priceText = priceEl;
+        const match = priceText.match(/[\d.]+/);
+        if (match) priceNum = parseFloat(match[0]) || 0;
+      }
+      const isFree = priceText.toLowerCase().includes('free');
+
+      // Release date
+      let releaseDate = getText(['div[data-testid="release-date"]', 'time', '[class*="release"]']);
+      if (!releaseDate) {
+        const match = doc.body.textContent.match(/\b(Release Date:?\s*)?(\d{4})/i);
+        releaseDate = match ? match[2] : 'Not Available';
+      }
+
+      // Developer
+      let developer = getText(['div[data-testid="developer"]', '[class*="developer"]', 'a[href*="/developer/"]']);
+      if (!developer) developer = 'Not Available';
+
+      // Publisher
+      let publisher = getText(['div[data-testid="publisher"]', '[class*="publisher"]', 'a[href*="/publisher/"]']);
+      if (!publisher) publisher = 'Not Available';
+
+      // Description
+      let description = getText(['div[data-testid="description"]', '[class*="description"]', '[class*="about"]']);
+      if (description && description.length > 50) {
+        description = description.slice(0, 50) + '…';
+      }
+      if (!description) description = 'Action-adventure game';
+
+      // Platforms
+      let platforms = ['Windows'];
+      const platformText = doc.body.textContent.toLowerCase();
+      if (platformText.includes('mac') || platformText.includes('macos')) platforms.push('Mac');
+      if (platformText.includes('linux')) platforms.push('Linux');
+
+      return {
+        title,
+        price: isFree ? 'Free' : priceText,
+        priceNumeric: priceNum,
+        releaseDate,
+        developer,
+        publisher,
+        rating: '★★★★☆',
+        description,
+        link: pageUrl,
+        inStock: true,
+        isDiscounted: priceText.includes('%'),
+        platforms,
+        isValid: true
+      };
     }
 
     // --- Main scrape function ---
@@ -1203,61 +1008,74 @@
       listContainer.innerHTML = '';
 
       try {
-        // Step 1: Discover ONLY game links
-        setStatus('loading', '🔍 Looking for game pages...');
-        const discoveredGames = await discoverRiotGames();
+        // Step 1: Discover game links
+        setStatus('loading', '🔍 Discovering game links...');
+        const gameUrls = await discoverGameLinks();
         
-        const gameCount = discoveredGames.length;
-        
-        if (gameCount === 0) {
-          setStatus('error', 'No games found on the Riot Games website.');
-          crawlProgress.style.display = 'none';
-          return;
+        if (gameUrls.length === 0) {
+          throw new Error('No game links found on the category page.');
         }
 
-        discoveredCount.textContent = gameCount;
-        totalToScrape.textContent = gameCount;
+        discoveredCount.textContent = gameUrls.length;
+        totalToScrape.textContent = gameUrls.length;
         scrapedCount.textContent = '0';
 
-        setStatus('loading', `📥 Found ${gameCount} game${gameCount !== 1 ? 's' : ''}. Scraping details...`);
+        setStatus('loading', `📥 Found ${gameUrls.length} games. Scraping details...`);
 
         // Step 2: Scrape each game page
         const results = [];
+        const parser = new DOMParser();
 
-        for (let i = 0; i < gameCount; i++) {
-          const game = discoveredGames[i];
-          setStatus('loading', `(${i+1}/${gameCount}) scraping ${game.text || 'game'}...`);
-          currentGame.textContent = `Processing ${i+1}/${gameCount}: ${game.text || 'Game page'}`;
+        for (let i = 0; i < gameUrls.length; i++) {
+          const url = gameUrls[i];
+          setStatus('loading', `(${i+1}/${gameUrls.length}) scraping...`);
+          currentGame.textContent = `Scraping ${i+1}/${gameUrls.length}`;
 
-          const gameData = await scrapeGamePage(game);
-          results.push(gameData);
+          try {
+            const html = await fetchWithFallback(url);
+            const doc = parser.parseFromString(html, 'text/html');
+            const gameData = extractGameData(doc, url);
+            results.push(gameData);
+          } catch (err) {
+            console.warn(`Failed to scrape ${url}:`, err);
+            // Create minimal entry with working URL
+            results.push({
+              title: `⚠️ Game ${i+1} (Failed to Load)`,
+              price: 'Not Available',
+              priceNumeric: 0,
+              releaseDate: 'Not Available',
+              developer: 'Not Available',
+              publisher: 'Not Available',
+              rating: 'Not Available',
+              description: 'Failed to load game page',
+              link: url,
+              inStock: false,
+              isDiscounted: false,
+              platforms: ['Unknown'],
+              isValid: false
+            });
+          }
 
           scrapedCount.textContent = i + 1;
-          const percent = ((i + 1) / gameCount) * 100;
+          const percent = ((i + 1) / gameUrls.length) * 100;
           progressFill.style.width = `${percent}%`;
           
-          // Small delay to avoid rate limiting
-          await new Promise(r => setTimeout(r, 800));
+          await new Promise(r => setTimeout(r, 300));
         }
 
         allGames = results;
 
-        // Only show UI if we have games
-        if (allGames.length > 0) {
-          statsRow.style.display = 'flex';
-          filterBar.style.display = 'flex';
-          exportBar.style.display = 'flex';
-          listHeader.style.display = 'flex';
+        statsRow.style.display = 'flex';
+        filterBar.style.display = 'flex';
+        exportBar.style.display = 'flex';
+        listHeader.style.display = 'flex';
 
-          statTotal.textContent = allGames.length;
-          statShown.textContent = allGames.length;
+        updateStats();
+        filterAndRender();
 
-          filterAndRender();
-
-          setStatus('success', `✅ Successfully scraped ${allGames.length} real game${allGames.length !== 1 ? 's' : ''} from Riot Games!`);
-        } else {
-          setStatus('error', 'No games could be scraped.');
-        }
+        const validGames = results.filter(g => g.isValid).length;
+        const failedGames = results.length - validGames;
+        setStatus('success', `✅ Scraped ${validGames} games successfully, ${failedGames} failed (click titles to try manually).`);
 
       } catch (err) {
         setStatus('error', err.message);
@@ -1268,6 +1086,15 @@
       }
     }
 
+    function updateStats() {
+      const total = allGames.length;
+      const freeCount = allGames.filter(g => g.price.toLowerCase().includes('free')).length;
+      const discountedCount = allGames.filter(g => g.isDiscounted).length;
+      statTotal.textContent = total;
+      statFree.textContent = freeCount;
+      statDiscounted.textContent = discountedCount;
+    }
+
     function applySorting() {
       if (titleSortOrder === 'asc') {
         filteredGames.sort((a, b) => a.title.localeCompare(b.title));
@@ -1276,42 +1103,44 @@
       }
     }
 
-    // --- UPDATED renderList function with new columns ---
     function renderList() {
       if (filteredGames.length === 0) {
-        listContainer.innerHTML = `<div class="empty-state">⚡ NO GAMES MATCH YOUR FILTER</div>`;
+        listContainer.innerHTML = `<div class="empty-state">🔍 No games match the filters</div>`;
         return;
       }
 
       let html = '';
-      filteredGames.forEach((game, idx) => {
-        // Format platforms as a string
-        const platformsStr = game.platforms && game.platforms.length > 0 
-          ? game.platforms.join(', ') 
-          : 'Not Available';
+      filteredGames.forEach((g, idx) => {
+        let platformsHtml = '';
+        if (g.platforms && g.platforms.length > 0) {
+          const platformIcons = { 'Windows': '🪟', 'Mac': '🍎', 'Linux': '🐧', 'Unknown': '❓' };
+          platformsHtml = g.platforms.map(p => 
+            `<span class="platform-badge"><span class="platform-icon">${platformIcons[p] || '💻'}</span> ${p}</span>`
+          ).join(' ');
+        } else {
+          platformsHtml = `<span class="platform-badge">💻 Not available</span>`;
+        }
 
         // Style for failed games
-        const rowStyle = game.failed ? 'opacity: 0.8;' : '';
-        
+        const titleClass = g.isValid === false ? 'title-link' : 'title-link';
+        const titleStyle = g.isValid === false ? 'opacity: 0.7;' : '';
+
         html += `
-          <div class="list-row" style="${rowStyle}">
+          <div class="list-row" style="${g.isValid === false ? 'opacity: 0.8;' : ''}">
             <div class="rank-title">
               <span class="rank">${idx+1}</span>
-              <div style="display: flex; align-items: center; gap: 0.8rem;">
-                <div class="image-placeholder">
-                  ${game.title.charAt(0).toUpperCase()}
-                </div>
-                <a class="title-link" href="${esc(game.url)}" target="_blank" rel="noopener" title="Visit game page">
-                  ${esc(game.title.substring(0, 30))}${game.title.length > 30 ? '…' : ''}
-                </a>
-              </div>
+              <a class="${titleClass}" href="${esc(g.link)}" target="_blank" rel="noopener" title="Open in Epic Games Store" style="${titleStyle}">
+                ${esc(g.title)}
+              </a>
             </div>
-            <span class="release-cell">${esc(game.releaseDate || 'Not Available')}</span>
-            <span class="platform-cell">${esc(platformsStr)}</span>
-            <span class="developer-cell" title="${esc(game.developer || 'Not Available')}">${esc((game.developer || 'Not Available').substring(0, 15))}${(game.developer || '').length > 15 ? '…' : ''}</span>
-            <span class="publisher-cell" title="${esc(game.publisher || 'Not Available')}">${esc((game.publisher || 'Not Available').substring(0, 15))}${(game.publisher || '').length > 15 ? '…' : ''}</span>
-            <span class="genre-pill">${esc(game.genre)}</span>
-            <span class="description-snip">${esc(game.description)}</span>
+            <span class="release-date">${esc(g.releaseDate)}</span>
+            <span class="developer">${esc(g.developer)}</span>
+            <span class="publisher">${esc(g.publisher)}</span>
+            <span class="price-pill">${esc(g.price)}</span>
+            <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; width: 110px;">${platformsHtml}</div>
+            <span class="rating">${esc(g.rating)}</span>
+            <span class="stock-badge">${g.inStock ? 'in stock' : 'unavailable'}</span>
+            <span class="description-snip">${esc(g.description)}</span>
           </div>
         `;
       });
@@ -1320,15 +1149,19 @@
 
     function filterAndRender() {
       const term = searchFilter.value.toLowerCase();
+      const priceOpt = priceFilter.value;
       
-      filteredGames = allGames.filter(game => {
-        if (term && !game.title.toLowerCase().includes(term) && 
-            !game.genre.toLowerCase().includes(term) && 
-            !(game.developer && game.developer.toLowerCase().includes(term)) &&
-            !(game.publisher && game.publisher.toLowerCase().includes(term)) &&
-            !game.description.toLowerCase().includes(term)) {
+      filteredGames = allGames.filter(g => {
+        if (term && !g.title.toLowerCase().includes(term) && 
+            !g.developer.toLowerCase().includes(term) && 
+            !g.publisher.toLowerCase().includes(term)) {
           return false;
         }
+        
+        const isFree = g.price.toLowerCase().includes('free');
+        
+        if (priceOpt === 'paid' && isFree) return false;
+        if (priceOpt === 'free' && !isFree) return false;
         return true;
       });
 
@@ -1351,52 +1184,53 @@
       filterAndRender();
     }
 
-    // --- UPDATED exportCSV with new fields ---
     function exportCSV() {
-      const headers = ['Title','Release Date','Platforms','Developer','Publisher','Genre','URL','Description','Status'];
-      const rows = filteredGames.map(game => {
-        const platformsStr = (game.platforms || []).join(', ');
-        const status = game.failed ? 'Partial' : 'Success';
-        return `"${game.title.replace(/"/g,'""')}","${(game.releaseDate || 'Not Available').replace(/"/g,'""')}","${platformsStr.replace(/"/g,'""')}","${(game.developer || 'Not Available').replace(/"/g,'""')}","${(game.publisher || 'Not Available').replace(/"/g,'""')}","${game.genre.replace(/"/g,'""')}","${game.url}","${game.description.replace(/"/g,'""')}","${status}"`;
+      const headers = ['Title','ReleaseDate','Developer','Publisher','Price','Platforms','Rating','InStock','Genre','URL','Status'];
+      const rows = filteredGames.map(g => {
+        const platformsStr = (g.platforms || []).join(', ');
+        const status = g.isValid ? 'Valid' : 'Failed';
+        return `"${g.title.replace(/"/g,'""')}","${g.releaseDate.replace(/"/g,'""')}","${g.developer.replace(/"/g,'""')}","${g.publisher.replace(/"/g,'""')}","${g.price.replace(/"/g,'""')}","${platformsStr.replace(/"/g,'""')}","${g.rating}",${g.inStock},"${g.description.replace(/"/g,'""')}","${g.link}","${status}"`;
       });
       const csv = [headers.join(','), ...rows].join('\n');
       const blob = new Blob(['\uFEFF' + csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `riot_games_${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = `epic_games_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
     }
 
-    // --- UPDATED exportJSON with new fields ---
     function exportJSON() {
-      const exportData = filteredGames.map(game => ({
-        title: game.title,
-        releaseDate: game.releaseDate || 'Not Available',
-        platforms: game.platforms || ['Not Available'],
-        developer: game.developer || 'Not Available',
-        publisher: game.publisher || 'Not Available',
-        genre: game.genre,
-        url: game.url,
-        description: game.description,
-        status: game.failed ? 'Partial' : 'Success'
+      const exportData = filteredGames.map(g => ({
+        title: g.title,
+        releaseDate: g.releaseDate,
+        developer: g.developer,
+        publisher: g.publisher,
+        price: g.price,
+        platforms: g.platforms,
+        rating: g.rating,
+        inStock: g.inStock,
+        genre: g.description,
+        url: g.link,
+        isValid: g.isValid
       }));
       const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `riot_games_${new Date().toISOString().slice(0,10)}.json`;
+      a.download = `epic_games_${new Date().toISOString().slice(0,10)}.json`;
       a.click();
     }
 
     // Event listeners
     scrapeBtn.addEventListener('click', startCrawling);
     searchFilter.addEventListener('input', filterAndRender);
+    priceFilter.addEventListener('change', filterAndRender);
     exportCsvBtn.addEventListener('click', exportCSV);
     exportJsonBtn.addEventListener('click', exportJSON);
     document.getElementById('sortByTitleBtn').addEventListener('click', toggleTitleSort);
 
     window.addEventListener('load', () => {
       statusDiv.style.display = 'flex';
-      statusDiv.innerHTML = '⚡ READY — WILL SCRAPE ONLY REAL GAMES (MAXIMUM 10, NO FABRICATED DATA)';
+      statusDiv.innerHTML = '⚡ Ready — URLs will be automatically fixed (removes /nl/, /en-US/, etc.)';
     });
   })();
 </script>
