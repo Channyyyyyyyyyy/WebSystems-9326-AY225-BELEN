@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeeksforGeeks C++ Complete Learning Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --bg-dark: #0d0b1a;
+            --bg-darker: #070514;
+            --bg-card: #1a1730;
+            --bg-card-hover: #221f3a;
+            --bg-surface: #2a2742;
+            --bg-surface-light: #322f4a;
+            
+            --primary: #a78bfa;
+            --primary-dark: #8b5cf6;
+            --primary-light: #c4b5fd;
+            --secondary: #2dd4bf;
+            --secondary-dark: #14b8a6;
+            --accent: #fbbf24;
+            --accent-dark: #f59e0b;
+            
+            --text-primary: #f3f4f6;
+            --text-secondary: #d1d5db;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            
+            --border: #374151;
+            --border-light: #4b5563;
+            
+            --gradient-1: linear-gradient(135deg, #a78bfa, #8b5cf6);
+            --gradient-2: linear-gradient(135deg, #2dd4bf, #14b8a6);
+            --gradient-3: linear-gradient(135deg, #fbbf24, #f59e0b);
+            --gradient-4: linear-gradient(135deg, #a78bfa, #2dd4bf);
+            
+            --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+            --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.6);
+            
+            --glow-primary: 0 0 15px rgba(167, 139, 250, 0.3);
+            --glow-secondary: 0 0 15px rgba(45, 212, 191, 0.3);
+            --glow-accent: 0 0 15px rgba(251, 191, 36, 0.3);
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: radial-gradient(circle at top left, #1a1740, #0a0819);
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-primary);
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            background: var(--bg-darker);
+            border-radius: 24px;
+            box-shadow: var(--shadow-xl), var(--glow-primary);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1f1b3a, #15122e);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            border-bottom: 3px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(167, 139, 250, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #a78bfa, #2dd4bf);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .compliance-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(45, 212, 191, 0.2));
+            backdrop-filter: blur(10px);
+            color: white;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-size: 0.9em;
+            font-weight: 500;
+            border: 1px solid var(--primary);
+            box-shadow: var(--glow-primary);
+            position: relative;
+        }
+
+        .main-content {
+            padding: 30px;
+            background: var(--bg-dark);
+        }
+
+        .control-panel {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-md);
+        }
+
+        .control-panel:hover {
+            border-color: var(--primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        .url-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .url-section input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1em;
+            min-width: 300px;
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .url-section input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--glow-primary);
+            background: var(--bg-surface-light);
+        }
+
+        .url-section input::placeholder {
+            color: var(--text-dim);
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            min-width: 140px;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-family: 'Outfit', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: var(--glow-primary);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(167, 139, 250, 0.5);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-secondary {
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        .btn-info {
+            background: var(--gradient-2);
+            color: white;
+            box-shadow: var(--glow-secondary);
+        }
+
+        .btn-success {
+            background: var(--gradient-3);
+            color: white;
+            box-shadow: var(--glow-accent);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.85em;
+            min-width: 100px;
+            border-radius: 10px;
+        }
+
+        .status-bar {
+            background: var(--bg-surface);
+            border-radius: 12px;
+            padding: 15px 20px;
+            margin: 20px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: slideIn 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .status-bar.error {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border-color: #ef4444;
+        }
+
+        .status-bar.success {
+            background: rgba(45, 212, 191, 0.2);
+            color: #2dd4bf;
+            border-color: #2dd4bf;
+        }
+
+        .status-bar.warning {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border-color: #fbbf24;
+        }
+
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--border);
+            border-top-color: var(--primary);
+            border-right-color: var(--secondary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .progress-container {
+            background: var(--bg-surface);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 1px solid var(--border);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: var(--bg-surface-light);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-4);
+            transition: width 0.3s ease;
+            border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: var(--gradient-1);
+            color: white;
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow-lg), var(--glow-primary);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+            animation: rotate 10s linear infinite;
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .filter-section {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .filter-section input,
+        .filter-section select {
+            padding: 12px 20px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            font-size: 1em;
+            flex: 1;
+            min-width: 200px;
+            background: var(--bg-surface);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .filter-section input:focus,
+        .filter-section select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--glow-primary);
+            background: var(--bg-surface-light);
+        }
+
+        .filter-section select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23a78bfa' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            background-size: 20px;
+            padding-right: 48px;
+        }
+
+        #filterCount {
+            padding: 12px 20px;
+            background: var(--gradient-1);
+            border-radius: 10px;
+            font-weight: 600;
+            color: white;
+            box-shadow: var(--glow-primary);
+        }
+
+        .category-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid;
+            border-image: var(--gradient-4) 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-count {
+            background: var(--gradient-2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-weight: 600;
+        }
+
+        .subcategory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .topic-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .topic-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-4);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg), var(--glow-primary);
+            background: var(--bg-card-hover);
+        }
+
+        .topic-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .topic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+            gap: 10px;
+        }
+
+        .topic-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: var(--text-primary);
+            flex: 1;
+            line-height: 1.4;
+        }
+
+        .difficulty-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: 600;
+            white-space: nowrap;
+            text-transform: uppercase;
+        }
+
+        .difficulty-easy {
+            background: rgba(45, 212, 191, 0.2);
+            color: #2dd4bf;
+            border: 1px solid #2dd4bf;
+        }
+
+        .difficulty-medium {
+            background: rgba(251, 191, 36, 0.2);
+            color: #fbbf24;
+            border: 1px solid #fbbf24;
+        }
+
+        .difficulty-hard {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid #ef4444;
+        }
+
+        .topic-concepts {
+            font-size: 0.95em;
+            color: var(--text-secondary);
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+
+        .code-preview-container {
+            background: #0a0819;
+            color: #a78bfa;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85em;
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), var(--glow-primary);
+            position: relative;
+        }
+
+        .code-preview-container::before {
+            content: '⚡ CODE';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: var(--gradient-1);
+            color: white;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.7em;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            box-shadow: var(--glow-primary);
+        }
+
+        .code-preview {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.5;
+        }
+
+        .topic-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: var(--text-muted);
+            margin: 10px 0;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: var(--bg-surface);
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .meta-item:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        .topic-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: flex-end;
+            border-top: 1px solid var(--border);
+            padding-top: 15px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: var(--bg-card);
+            box-shadow: var(--shadow-lg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: transparent;
+        }
+
+        th {
+            background: var(--gradient-1);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        th:first-child {
+            border-top-left-radius: 15px;
+        }
+
+        th:last-child {
+            border-top-right-radius: 15px;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+            color: var(--text-secondary);
+        }
+
+        tr:hover td {
+            background: var(--bg-surface);
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .view-toggle {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .toggle-btn {
+            padding: 10px 30px;
+            border: 2px solid var(--primary);
+            background: transparent;
+            color: var(--primary);
+            border-radius: 10px;
+            cursor: pointer;
+            min-width: 120px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-btn.active {
+            background: var(--gradient-1);
+            color: white;
+            border-color: transparent;
+            box-shadow: var(--glow-primary);
+        }
+
+        .toggle-btn:hover:not(.active) {
+            background: rgba(167, 139, 250, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #1f1b3a, #15122e);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 20px;
+            border-top: 3px solid var(--primary);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 2px dashed var(--border);
+        }
+
+        .empty-state h2 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .pdf-progress {
+            margin-top: 15px;
+            padding: 10px;
+            background: var(--bg-surface);
+            border-radius: 10px;
+            font-size: 0.9em;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { border-color: var(--primary); }
+            50% { border-color: var(--secondary); }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-surface);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--gradient-1);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gradient-4);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .subcategory-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .topic-actions {
+                flex-direction: column;
+            }
+
+            .topic-actions .btn-small {
+                width: 100%;
+            }
+
+            .table-actions {
+                flex-direction: column;
+            }
+
+            .view-toggle {
+                flex-direction: column;
+            }
+
+            .toggle-btn {
+                width: 100%;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Your HTML remains exactly the same -->
+    <div class="container">
+        <div class="header">
+            <h1 id="headerTitle"></h1>
+            <p id="headerSubtitle"></p>
+            <div class="compliance-badge" id="complianceBadge"></div>
+        </div>
+
+        <div class="main-content">
+            <div class="control-panel">
+                <div class="url-section">
+                    <input type="url" id="urlInput" placeholder="" readonly>
+                    <button class="btn btn-primary" id="scrapeBtn">
+                        <span>🔄</span> <span id="scrapeBtnText"></span>
+                    </button>
+                </div>
+
+                <div id="status" class="status-bar" style="display: none;"></div>
+
+                <div id="progressSection" style="display: none;">
+                    <div class="progress-container">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span><span id="progressLabel"></span> <span id="currentPhase"></span></span>
+                            <span><span id="completedCount">0</span>/<span id="totalCount">0</span></span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                        </div>
+                        <div id="currentTopic" style="margin-top: 10px; color: var(--text-secondary); font-weight: 500;"></div>
+                    </div>
+                </div>
+
+                <div id="statsSection" style="display: none;">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <h3 id="statCategories">0</h3>
+                            <p id="statCategoriesLabel"></p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="statTotal">0</h3>
+                            <p id="statTotalLabel"></p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="statWithCode">0</h3>
+                            <p id="statWithCodeLabel"></p>
+                        </div>
+                        <div class="stat-card">
+                            <h3 id="statWithComplexity">0</h3>
+                            <p id="statWithComplexityLabel"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="filterSection" style="display: none;">
+                    <div class="filter-section">
+                        <input type="text" id="searchFilter" placeholder="">
+                        <select id="difficultyFilter"></select>
+                        <select id="categoryFilter"></select>
+                        <span id="filterCount"></span>
+                    </div>
+                </div>
+
+                <div class="view-toggle" id="viewToggle" style="display: none;">
+                    <button class="toggle-btn active" id="cardViewBtn"></button>
+                    <button class="toggle-btn" id="tableViewBtn"></button>
+                </div>
+
+                <div id="pdfGenerationProgress" class="pdf-progress" style="display: none;"></div>
+
+                <div id="contentSection"></div>
+
+                <div id="actionSection" style="display: none;">
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" id="exportJsonBtn">
+                            <span>📋</span> <span id="exportJsonText"></span>
+                        </button>
+                        <button class="btn btn-info" id="downloadSummaryPdfBtn">
+                            <span>📑</span> <span id="downloadSummaryText"></span>
+                        </button>
+                        <button class="btn btn-success" id="downloadDetailedPdfBtn">
+                            <span>📚</span> <span id="downloadDetailedText"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="emptyState" class="empty-state"></div>
+        </div>
+
+        <div class="footer">
+            <p id="footerText"></p>
+            <p id="footerSubtext" style="font-size: 0.8em; margin-top: 5px;"></p>
+        </div>
+    </div>
+
+    <!-- Your JavaScript remains exactly the same -->
+    <script>
+        // Your existing JavaScript code here - unchanged
+        (function() {
+            // ALL TEXT CONTENT - DYNAMICALLY SET
+            const UI = {
+                header: {
+                    title: '📚 GeeksforGeeks C++ Complete Learning Hub',
+                    subtitle: 'Comprehensive C++ Learning Material | Real Code Examples | Detailed Explanations',
+                    badge: '✓ Complete Content | Real Code | All Topics & Subtopics'
+                },
+                buttons: {
+                    scrape: '🚀 Start Scraping',
+                    exportJson: '📥 Export JSON',
+                    downloadSummary: '📑 Download Summary PDF',
+                    downloadDetailed: '📚 Download Complete PDF',
+                    cardView: '📊 Card View',
+                    tableView: '📋 Table View',
+                    viewOnline: '🔗 View Online'
+                },
+                labels: {
+                    urlPlaceholder: 'Enter GeeksforGeeks C++ URL',
+                    progressOverall: '📊 Overall Progress:',
+                    progressInitializing: 'Initializing...',
+                    statCategories: 'Categories',
+                    statTotal: 'Total Topics',
+                    statWithCode: 'With Code',
+                    statWithComplexity: 'With Complexity',
+                    searchPlaceholder: '🔍 Search topics, concepts, or code...',
+                    allDifficulties: '📊 All Difficulties',
+                    easyOnly: '🟢 Easy Only',
+                    mediumOnly: '🟡 Medium Only',
+                    hardOnly: '🔴 Hard Only',
+                    allCategories: '📁 All Categories',
+                    filterCount: 'topics found',
+                    hasCode: '✅ Has code',
+                    noCode: '❌ No code',
+                    hasComplexity: '✅ Has complexity',
+                    noComplexity: '❌ No complexity',
+                    noDescription: '📝 Full explanation available in the article',
+                    noCodeAvailable: '// Code example not available in preview\n// Click "View Online" to see the full article',
+                    subtopics: '🔗 Related Topics:',
+                    concepts: '📚 Key Concepts',
+                    complexity: '⚡ Complexity Analysis',
+                    timeComplexity: '⏱️ Time Complexity',
+                    spaceComplexity: '💾 Space Complexity',
+                    codeExample: '💻 Code Example',
+                    fullExplanation: '📖 Full Explanation',
+                    generated: '📅 Generated',
+                    page: '📄 Page',
+                    of: 'of'
+                },
+                emptyState: {
+                    title: '🚀 Ready to Scrape Complete C++ Content',
+                    desc: 'Click "Start Scraping" to fetch ALL topics, subtopics, and detailed content with real code examples',
+                    note1: '✓ All code previews show actual C++ code from articles',
+                    note2: '✓ Complete explanations and concepts included',
+                    note3: '✓ Parent-child relationships preserved',
+                    note4: '✓ Full complexity analysis included'
+                },
+                footer: {
+                    text: 'Generated by GeeksforGeeks C++ Complete Learning Hub',
+                    subtext: 'All content dynamically fetched · Real code in previews · Complete topic relationships'
+                },
+                tableHeaders: ['#', 'Category', 'Topic', 'Difficulty', 'Preview', 'Code Snippet', 'Time', 'Space', 'Actions'],
+                status: {
+                    ready: '⚡ Ready - Will scrape ALL content with real code previews',
+                    discovering: '🔍 Discovering all topics and subtopics...',
+                    scraping: '📚 Found {count} topics. Extracting detailed content from each...',
+                    success: '✅ Successfully scraped {count} topics with complete content!',
+                    error: '❌ Error: {error}',
+                    loadingPdf: '📄 Generating PDF...',
+                    pdfSummaryComplete: '✅ Summary PDF generated with {count} topics!',
+                    pdfDetailedComplete: '✅ Complete detailed PDF generated with {count} topics!',
+                    exported: '✅ Exported {count} topics to JSON',
+                    generatingDetailed: '📚 Generating detailed PDF with complete content...',
+                    pdfProgress: '📄 Processing topic {current}/{total}: {title}'
+                }
+            };
+
+            // Set UI text
+            document.getElementById('headerTitle').textContent = UI.header.title;
+            document.getElementById('headerSubtitle').textContent = UI.header.subtitle;
+            document.getElementById('complianceBadge').textContent = UI.header.badge;
+            document.getElementById('urlInput').placeholder = UI.labels.urlPlaceholder;
+            document.getElementById('urlInput').value = 'https://www.geeksforgeeks.org/cpp-tutorial/';
+            document.getElementById('scrapeBtnText').textContent = UI.buttons.scrape;
+            document.getElementById('progressLabel').textContent = UI.labels.progressOverall;
+            document.getElementById('currentPhase').textContent = UI.labels.progressInitializing;
+            document.getElementById('statCategoriesLabel').textContent = UI.labels.statCategories;
+            document.getElementById('statTotalLabel').textContent = UI.labels.statTotal;
+            document.getElementById('statWithCodeLabel').textContent = UI.labels.statWithCode;
+            document.getElementById('statWithComplexityLabel').textContent = UI.labels.statWithComplexity;
+            document.getElementById('searchFilter').placeholder = UI.labels.searchPlaceholder;
+            
+            const difficultySelect = document.getElementById('difficultyFilter');
+            difficultySelect.innerHTML = `
+                <option value="">${UI.labels.allDifficulties}</option>
+                <option value="Easy">${UI.labels.easyOnly}</option>
+                <option value="Medium">${UI.labels.mediumOnly}</option>
+                <option value="Hard">${UI.labels.hardOnly}</option>
+            `;
+            
+            document.getElementById('cardViewBtn').textContent = UI.buttons.cardView;
+            document.getElementById('tableViewBtn').textContent = UI.buttons.tableView;
+            document.getElementById('exportJsonText').textContent = UI.buttons.exportJson;
+            document.getElementById('downloadSummaryText').textContent = UI.buttons.downloadSummary;
+            document.getElementById('downloadDetailedText').textContent = UI.buttons.downloadDetailed;
+            
+            document.getElementById('emptyState').innerHTML = `
+                <h2>${UI.emptyState.title}</h2>
+                <p style="margin: 15px 0; color: #4a5568;">${UI.emptyState.desc}</p>
+                <div style="display: flex; flex-direction: column; gap: 8px; align-items: center; margin-top: 20px;">
+                    <p style="color: #48bb78;">${UI.emptyState.note1}</p>
+                    <p style="color: #4299e1;">${UI.emptyState.note2}</p>
+                    <p style="color: #9f7aea;">${UI.emptyState.note3}</p>
+                    <p style="color: #ed8936;">${UI.emptyState.note4}</p>
+                </div>
+            `;
+            
+            document.getElementById('footerText').textContent = UI.footer.text;
+            document.getElementById('footerSubtext').textContent = UI.footer.subtext;
+
+            // State
+            let allTopics = [];
+            let filteredTopics = [];
+            let categories = new Set();
+            let isScraping = false;
+            let currentView = 'card';
+
+            const elements = {
+                urlInput: document.getElementById('urlInput'),
+                scrapeBtn: document.getElementById('scrapeBtn'),
+                status: document.getElementById('status'),
+                progressSection: document.getElementById('progressSection'),
+                statsSection: document.getElementById('statsSection'),
+                filterSection: document.getElementById('filterSection'),
+                viewToggle: document.getElementById('viewToggle'),
+                contentSection: document.getElementById('contentSection'),
+                actionSection: document.getElementById('actionSection'),
+                emptyState: document.getElementById('emptyState'),
+                currentPhase: document.getElementById('currentPhase'),
+                completedCount: document.getElementById('completedCount'),
+                totalCount: document.getElementById('totalCount'),
+                progressFill: document.getElementById('progressFill'),
+                currentTopic: document.getElementById('currentTopic'),
+                pdfProgress: document.getElementById('pdfGenerationProgress'),
+                statCategories: document.getElementById('statCategories'),
+                statTotal: document.getElementById('statTotal'),
+                statWithCode: document.getElementById('statWithCode'),
+                statWithComplexity: document.getElementById('statWithComplexity'),
+                searchFilter: document.getElementById('searchFilter'),
+                difficultyFilter: document.getElementById('difficultyFilter'),
+                categoryFilter: document.getElementById('categoryFilter'),
+                filterCount: document.getElementById('filterCount'),
+                exportJsonBtn: document.getElementById('exportJsonBtn'),
+                downloadSummaryPdfBtn: document.getElementById('downloadSummaryPdfBtn'),
+                downloadDetailedPdfBtn: document.getElementById('downloadDetailedPdfBtn'),
+                cardViewBtn: document.getElementById('cardViewBtn'),
+                tableViewBtn: document.getElementById('tableViewBtn')
+            };
+
+            // CORS Proxies
+            const PROXIES = [
+                { name: 'corsproxy.io', url: (t) => `https://corsproxy.io/?${encodeURIComponent(t)}`, extract: async (r) => await r.text() },
+                { name: 'api.allorigins.win', url: (t) => `https://api.allorigins.win/get?url=${encodeURIComponent(t)}`, extract: async (r) => (await r.json()).contents }
+            ];
+
+            function setStatus(type, message) {
+                elements.status.style.display = 'flex';
+                elements.status.className = `status-bar ${type}`;
+                elements.status.innerHTML = type === 'loading' ? `<div class="spinner"></div> ${message}` : 
+                    (type === 'error' ? `❌ ${message}` : `✅ ${message}`);
+                
+                if (type !== 'loading') {
+                    setTimeout(() => {
+                        elements.status.style.display = 'none';
+                    }, 5000);
+                }
+            }
+
+            function escapeHtml(text) {
+                if (!text) return 'Not Available';
+                return String(text).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+            }
+
+            async function fetchWithProxy(url) {
+                for (const proxy of PROXIES) {
+                    try {
+                        const res = await fetch(proxy.url(url), { signal: AbortSignal.timeout(15000) });
+                        if (!res.ok) continue;
+                        const content = await proxy.extract(res);
+                        if (content && content.length > 100) return content;
+                    } catch (e) { continue; }
+                }
+                throw new Error('All proxies failed');
+            }
+
+            // Enhanced code extraction with full content
+            async function extractFullContent(html) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                // Extract full article content
+                const articleSelectors = [
+                    'article',
+                    '.entry-content',
+                    '.content',
+                    '.post-content',
+                    'main',
+                    '#main-content'
+                ];
+                
+                let articleContent = '';
+                for (const selector of articleSelectors) {
+                    const element = doc.querySelector(selector);
+                    if (element) {
+                        articleContent = element.textContent.trim();
+                        break;
+                    }
+                }
+                
+                // Extract all code blocks
+                const codeSelectors = [
+                    'pre code',
+                    'pre',
+                    'code',
+                    '.code-block',
+                    '[class*="code"]',
+                    '.highlight',
+                    '.syntaxhighlighter',
+                    'div[class*="brush:"]',
+                    'pre[class*="brush:"]'
+                ];
+                
+                const allCode = [];
+                for (const selector of codeSelectors) {
+                    const elements = doc.querySelectorAll(selector);
+                    elements.forEach(el => {
+                        const code = el.textContent.trim();
+                        if (code.length > 20 && (code.includes('{') || code.includes(';') || code.includes('#include'))) {
+                            allCode.push(code);
+                        }
+                    });
+                }
+                
+                // Extract explanations
+                const explanations = [];
+                const paragraphs = doc.querySelectorAll('p');
+                paragraphs.forEach(p => {
+                    const text = p.textContent.trim();
+                    if (text.length > 100 && !text.includes('cookie') && !text.includes('privacy')) {
+                        explanations.push(text);
+                    }
+                });
+                
+                // Extract examples and use cases
+                const examples = [];
+                const listItems = doc.querySelectorAll('li');
+                listItems.forEach(li => {
+                    const text = li.textContent.trim();
+                    if (text.length > 50 && text.toLowerCase().includes('example')) {
+                        examples.push(text);
+                    }
+                });
+                
+                return {
+                    articleContent: articleContent.substring(0, 2000),
+                    allCode: allCode,
+                    explanations: explanations.slice(0, 5),
+                    examples: examples.slice(0, 3)
+                };
+            }
+
+            // Enhanced complexity extraction
+            function extractComplexity(html) {
+                const bodyText = html;
+                let time = 'Not Available';
+                let space = 'Not Available';
+                let detailedComplexity = '';
+                
+                const timeMatch = bodyText.match(/Time Complexity[:\s]*([^.\n]+)/i);
+                if (timeMatch) time = timeMatch[1].trim();
+                
+                const spaceMatch = bodyText.match(/Space Complexity[:\s]*([^.\n]+)/i);
+                if (spaceMatch) space = spaceMatch[1].trim();
+                
+                // Extract detailed complexity analysis
+                const complexitySection = bodyText.match(/Complexity[^]*?(?=\n\n|\n#|\n\d\.|$)/i);
+                if (complexitySection) {
+                    detailedComplexity = complexitySection[0].substring(0, 500);
+                }
+                
+                return { time, space, detailedComplexity };
+            }
+
+            // Discover ALL topics with enhanced metadata
+            async function discoverAllTopics() {
+                setStatus('loading', UI.status.discovering);
+                elements.currentPhase.textContent = 'Discovering all topics and subtopics';
+                
+                const html = await fetchWithProxy(elements.urlInput.value);
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                
+                const topics = [];
+                const seen = new Set();
+                
+                // Enhanced topic discovery
+                const topicSelectors = [
+                    'a[href*="/cpp/"]',
+                    'a[href*="c-plus-plus"]',
+                    'a[href*="C++"]',
+                    '.entry-content a',
+                    '.post-content a',
+                    'article a',
+                    '.toc a',
+                    '.table-of-contents a',
+                    '.index a'
+                ];
+                
+                topicSelectors.forEach(selector => {
+                    const links = doc.querySelectorAll(selector);
+                    links.forEach(link => {
+                        const href = link.href || link.getAttribute('href');
+                        const title = link.textContent.trim();
+                        
+                        if (!href || !title || title.length < 5) return;
+                        if (seen.has(href)) return;
+                        
+                        // Filter out non-topic links
+                        const excludeTerms = ['login', 'sign', 'course', 'tutorial', 'practice', 'problem', 
+                                           'contest', 'job', 'internship', 'comment', 'policy', 'cookie'];
+                        if (excludeTerms.some(term => title.toLowerCase().includes(term))) return;
+                        
+                        // Enhanced category detection
+                        let category = 'General C++';
+                        const lower = title.toLowerCase();
+                        if (lower.includes('basics') || lower.includes('fundamental') || lower.includes('intro')) 
+                            category = 'C++ Basics';
+                        else if (lower.includes('function')) category = 'Functions';
+                        else if (lower.includes('data type') || lower.includes('variable')) 
+                            category = 'Data Types & Variables';
+                        else if (lower.includes('class') || lower.includes('object') || lower.includes('oop')) 
+                            category = 'Object-Oriented Programming';
+                        else if (lower.includes('stl') || lower.includes('vector') || lower.includes('list') || 
+                                lower.includes('map') || lower.includes('set')) 
+                            category = 'STL (Standard Template Library)';
+                        else if (lower.includes('pointer') || lower.includes('reference')) 
+                            category = 'Pointers & References';
+                        else if (lower.includes('memory') || lower.includes('alloc')) 
+                            category = 'Memory Management';
+                        else if (lower.includes('exception') || lower.includes('try') || lower.includes('catch')) 
+                            category = 'Exception Handling';
+                        else if (lower.includes('file') || lower.includes('stream') || lower.includes('fstream')) 
+                            category = 'File Handling';
+                        else if (lower.includes('template')) category = 'Templates';
+                        else if (lower.includes('multithreading') || lower.includes('thread')) 
+                            category = 'Multithreading';
+                        else if (lower.includes('algorithm')) category = 'Algorithms';
+                        else if (lower.includes('advanced')) category = 'Advanced Concepts';
+                        
+                        // Enhanced difficulty detection
+                        let difficulty = 'Medium';
+                        if (lower.includes('basics') || lower.includes('intro') || lower.includes('first') || 
+                            lower.includes('simple') || lower.includes('beginner')) {
+                            difficulty = 'Easy';
+                        } else if (lower.includes('advanced') || lower.includes('complex') || 
+                                  lower.includes('expert') || lower.includes('optimization')) {
+                            difficulty = 'Hard';
+                        }
+                        
+                        const fullUrl = href.startsWith('http') ? href : 
+                            `https://www.geeksforgeeks.org${href.startsWith('/') ? href : '/' + href}`;
+                        
+                        seen.add(href);
+                        categories.add(category);
+                        
+                        topics.push({
+                            id: `topic-${topics.length}`,
+                            title: title,
+                            url: fullUrl,
+                            category: category,
+                            difficulty: difficulty,
+                            concepts: [],
+                            allCode: [],
+                            explanations: [],
+                            examples: [],
+                            realCode: '',
+                            fullArticle: '',
+                            timeComplexity: 'Not Available',
+                            spaceComplexity: 'Not Available',
+                            detailedComplexity: '',
+                            relatedTopics: [],
+                            extracted: false
+                        });
+                    });
+                });
+                
+                console.log(`Discovered ${topics.length} topics`);
+                return topics;
+            }
+
+            // Enhanced topic details extraction with full content
+            async function extractTopicDetails(topic, index, total) {
+                elements.currentTopic.textContent = `📖 Scraping ${index}/${total}: ${topic.title}`;
+                
+                try {
+                    const html = await fetchWithProxy(topic.url);
+                    
+                    // Extract full content
+                    const fullContent = await extractFullContent(html);
+                    
+                    // Extract complexity
+                    const { time, space, detailedComplexity } = extractComplexity(html);
+                    
+                    // Find related topics
+                    const related = findRelatedTopics(html, topic.url);
+                    
+                    return {
+                        ...topic,
+                        concepts: fullContent.explanations.length > 0 ? fullContent.explanations : 
+                                 ['Full explanation available in the article'],
+                        allCode: fullContent.allCode,
+                        realCode: fullContent.allCode.length > 0 ? fullContent.allCode[0] : '',
+                        explanations: fullContent.explanations,
+                        examples: fullContent.examples,
+                        fullArticle: fullContent.articleContent,
+                        timeComplexity: time,
+                        spaceComplexity: space,
+                        detailedComplexity: detailedComplexity,
+                        relatedTopics: related,
+                        extracted: true
+                    };
+                    
+                } catch (error) {
+                    console.warn(`Failed to scrape ${topic.title}:`, error);
+                    return {
+                        ...topic,
+                        concepts: ['⚠️ Failed to load content. Click "View Online" to read the full article.'],
+                        allCode: [],
+                        realCode: '',
+                        explanations: [],
+                        examples: [],
+                        fullArticle: '',
+                        timeComplexity: 'Not Available',
+                        spaceComplexity: 'Not Available',
+                        detailedComplexity: '',
+                        relatedTopics: [],
+                        extracted: false
+                    };
+                }
+            }
+
+            // Enhanced related topics finder
+            function findRelatedTopics(html, currentUrl) {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const related = [];
+                const seen = new Set();
+                
+                const linkSelectors = [
+                    'a[href*="/cpp/"]',
+                    'a[href*="c-plus-plus"]',
+                    '.related a',
+                    '.similar a',
+                    '.also-read a',
+                    'aside a',
+                    '.sidebar a'
+                ];
+                
+                linkSelectors.forEach(selector => {
+                    const links = doc.querySelectorAll(selector);
+                    links.forEach(link => {
+                        const href = link.href || link.getAttribute('href');
+                        const title = link.textContent.trim();
+                        
+                        if (!href || !title || title.length < 5) return;
+                        if (seen.has(href)) return;
+                        if (title.includes('Login') || title.includes('Sign')) return;
+                        if (href === currentUrl) return;
+                        
+                        const excludeTerms = ['login', 'sign', 'course', 'practice', 'problem', 'comment'];
+                        if (excludeTerms.some(term => title.toLowerCase().includes(term))) return;
+                        
+                        seen.add(href);
+                        const fullUrl = href.startsWith('http') ? href : 
+                            `https://www.geeksforgeeks.org${href.startsWith('/') ? href : '/' + href}`;
+                        
+                        related.push({
+                            title: title.substring(0, 50),
+                            url: fullUrl
+                        });
+                    });
+                });
+                
+                return related.slice(0, 5);
+            }
+
+            // Main scraping function
+            async function startScraping() {
+                if (isScraping) return;
+                
+                isScraping = true;
+                elements.scrapeBtn.disabled = true;
+                allTopics = [];
+                categories.clear();
+                
+                elements.emptyState.style.display = 'none';
+                elements.progressSection.style.display = 'block';
+                elements.statsSection.style.display = 'none';
+                elements.filterSection.style.display = 'none';
+                elements.viewToggle.style.display = 'none';
+                elements.contentSection.innerHTML = '';
+                elements.actionSection.style.display = 'none';
+                elements.pdfProgress.style.display = 'none';
+                
+                try {
+                    // Discover all topics
+                    const discovered = await discoverAllTopics();
+                    
+                    if (discovered.length === 0) throw new Error('No topics found');
+                    
+                    elements.totalCount.textContent = discovered.length;
+                    setStatus('loading', UI.status.scraping.replace('{count}', discovered.length));
+                    
+                    // Update category filter
+                    const categoryOptions = [`<option value="">${UI.labels.allCategories}</option>`];
+                    Array.from(categories).sort().forEach(c => 
+                        categoryOptions.push(`<option value="${c}">${c}</option>`));
+                    elements.categoryFilter.innerHTML = categoryOptions.join('');
+                    
+                    // Scrape each topic
+                    const scraped = [];
+                    for (let i = 0; i < discovered.length; i++) {
+                        elements.currentPhase.textContent = `Scraping detailed content (${i + 1}/${discovered.length})`;
+                        
+                        const detailed = await extractTopicDetails(discovered[i], i + 1, discovered.length);
+                        scraped.push(detailed);
+                        
+                        elements.completedCount.textContent = i + 1;
+                        elements.progressFill.style.width = `${((i + 1) / discovered.length) * 100}%`;
+                        
+                        // Rate limiting
+                        await new Promise(r => setTimeout(r, 300));
+                    }
+                    
+                    allTopics = scraped;
+                    filteredTopics = [...allTopics];
+                    
+                    // Update stats
+                    elements.statCategories.textContent = categories.size;
+                    elements.statTotal.textContent = allTopics.length;
+                    elements.statWithCode.textContent = allTopics.filter(t => t.realCode && t.realCode.length > 0).length;
+                    elements.statWithComplexity.textContent = allTopics.filter(t => !t.timeComplexity.includes('Not Available')).length;
+                    
+                    renderContent();
+                    
+                    elements.statsSection.style.display = 'block';
+                    elements.filterSection.style.display = 'block';
+                    elements.viewToggle.style.display = 'flex';
+                    elements.actionSection.style.display = 'block';
+                    elements.progressSection.style.display = 'none';
+                    
+                    setStatus('success', UI.status.success.replace('{count}', allTopics.length));
+                    
+                } catch (error) {
+                    setStatus('error', UI.status.error.replace('{error}', error.message));
+                    elements.emptyState.style.display = 'block';
+                } finally {
+                    isScraping = false;
+                    elements.scrapeBtn.disabled = false;
+                }
+            }
+
+            // Card view with only View Online button (no download buttons)
+            function renderCardView() {
+                if (filteredTopics.length === 0) {
+                    elements.contentSection.innerHTML = '<div class="empty-state">No matching topics found</div>';
+                    return;
+                }
+                
+                const grouped = {};
+                filteredTopics.forEach(t => {
+                    if (!grouped[t.category]) grouped[t.category] = [];
+                    grouped[t.category].push(t);
+                });
+                
+                let html = '';
+                Object.keys(grouped).sort().forEach(category => {
+                    html += `<div class="category-title">
+                        📌 ${category}
+                        <span class="category-count">${grouped[category].length} topics</span>
+                    </div>`;
+                    html += '<div class="subcategory-grid">';
+                    
+                    grouped[category].forEach(topic => {
+                        // Show real code with full content
+                        const codeDisplay = topic.realCode && topic.realCode.length > 0 
+                            ? `<div class="code-preview-container">
+                                <pre class="code-preview">${escapeHtml(topic.realCode.substring(0, 400))}${topic.realCode.length > 400 ? '\n// ... (full code in PDF)' : ''}</pre>
+                               </div>`
+                            : `<div class="code-preview-container" style="color: #888; font-style: italic;">
+                                <pre class="code-preview">${UI.labels.noCodeAvailable}</pre>
+                               </div>`;
+                        
+                        // Show explanations
+                        const explanationsHtml = topic.explanations && topic.explanations.length > 0
+                            ? `<div style="margin: 10px 0; padding: 10px; background: var(--bg-surface); border-radius: 8px;">
+                                <strong>📝 Key Points:</strong>
+                                <ul style="margin-top: 5px; padding-left: 20px; color: var(--text-secondary);">
+                                    ${topic.explanations.slice(0, 2).map(e => 
+                                        `<li style="margin: 5px 0;">${escapeHtml(e.substring(0, 100))}...</li>`
+                                    ).join('')}
+                                </ul>
+                               </div>`
+                            : '';
+                        
+                        // Show examples
+                        const examplesHtml = topic.examples && topic.examples.length > 0
+                            ? `<div style="margin: 10px 0;">
+                                <strong>💡 Examples:</strong>
+                                <div style="margin-top: 5px;">
+                                    ${topic.examples.slice(0, 2).map(e => 
+                                        `<div style="background: var(--bg-surface); padding: 5px 10px; border-radius: 8px; margin: 5px 0; font-size: 0.9em; border: 1px solid var(--border);">
+                                            ${escapeHtml(e.substring(0, 80))}...
+                                        </div>`
+                                    ).join('')}
+                                </div>
+                               </div>`
+                            : '';
+                        
+                        // Show related topics
+                        const relatedHtml = topic.relatedTopics && topic.relatedTopics.length > 0 ? `
+                            <div style="margin: 10px 0; font-size: 0.85em;">
+                                <strong>${UI.labels.subtopics}</strong>
+                                <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px;">
+                                    ${topic.relatedTopics.map(r => 
+                                        `<span style="background: var(--bg-surface); padding: 2px 8px; border-radius: 12px; font-size: 0.8em; border: 1px solid var(--border);">
+                                            ${escapeHtml(r.title.substring(0, 25))}
+                                        </span>`
+                                    ).join('')}
+                                </div>
+                            </div>
+                        ` : '';
+                        
+                        html += `
+                            <div class="topic-card">
+                                <div class="topic-header">
+                                    <span class="topic-title">${escapeHtml(topic.title)}</span>
+                                    <span class="difficulty-badge difficulty-${topic.difficulty.toLowerCase()}">${topic.difficulty}</span>
+                                </div>
+                                <div class="topic-concepts">
+                                    <strong>${UI.labels.concepts}:</strong><br>
+                                    ${escapeHtml(topic.concepts[0] || UI.labels.noDescription)}
+                                </div>
+                                ${explanationsHtml}
+                                ${codeDisplay}
+                                ${examplesHtml}
+                                ${relatedHtml}
+                                <div class="topic-meta">
+                                    <span class="meta-item">💻 ${topic.realCode ? UI.labels.hasCode : UI.labels.noCode}</span>
+                                    <span class="meta-item">⏱️ ${!topic.timeComplexity.includes('Not Available') ? UI.labels.hasComplexity : UI.labels.noComplexity}</span>
+                                </div>
+                                <div class="topic-actions">
+                                    <a href="${escapeHtml(topic.url)}" target="_blank" class="btn btn-small btn-secondary">
+                                        🔗 ${UI.buttons.viewOnline}
+                                    </a>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div>';
+                });
+                
+                elements.contentSection.innerHTML = html;
+            }
+
+            // Table view with only View Online button (no download buttons)
+            function renderTableView() {
+                if (filteredTopics.length === 0) {
+                    elements.contentSection.innerHTML = '<div class="empty-state">No matching topics found</div>';
+                    return;
+                }
+                
+                let html = `
+                    <div class="table-container">
+                        <table>
+                            <thead><tr>${UI.tableHeaders.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+                            <tbody>
+                `;
+                
+                filteredTopics.forEach((t, i) => {
+                    const codePreview = t.realCode ? t.realCode.substring(0, 40) + '...' : 'No code';
+                    const conceptsPreview = t.concepts[0] ? t.concepts[0].substring(0, 60) + '...' : 'No preview';
+                    
+                    html += `
+                        <tr>
+                            <td>${i + 1}</td>
+                            <td>${escapeHtml(t.category)}</td>
+                            <td><strong>${escapeHtml(t.title)}</strong></td>
+                            <td><span class="difficulty-badge difficulty-${t.difficulty.toLowerCase()}">${t.difficulty}</span></td>
+                            <td><div style="max-width: 200px; font-size: 0.9em; color: var(--text-secondary);">${escapeHtml(conceptsPreview)}</div></td>
+                            <td><code style="background: var(--bg-surface); padding:2px 5px; display:block; max-width:200px; overflow:hidden; border-radius:4px;">${escapeHtml(codePreview)}</code></td>
+                            <td>${escapeHtml(t.timeComplexity.substring(0, 20))}</td>
+                            <td>${escapeHtml(t.spaceComplexity.substring(0, 20))}</td>
+                            <td>
+                                <div class="table-actions">
+                                    <a href="${escapeHtml(t.url)}" target="_blank" class="btn btn-small btn-secondary">
+                                        🔗 ${UI.buttons.viewOnline}
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                });
+                
+                html += '</tbody></table></div>';
+                elements.contentSection.innerHTML = html;
+            }
+
+            function filterTopics() {
+                const search = elements.searchFilter.value.toLowerCase();
+                const difficulty = elements.difficultyFilter.value;
+                const category = elements.categoryFilter.value;
+                
+                filteredTopics = allTopics.filter(t => {
+                    if (search) {
+                        const searchable = `${t.title} ${t.concepts.join(' ')} ${t.explanations.join(' ')} ${t.realCode}`.toLowerCase();
+                        if (!searchable.includes(search)) return false;
+                    }
+                    if (difficulty && t.difficulty !== difficulty) return false;
+                    if (category && t.category !== category) return false;
+                    return true;
+                });
+                
+                elements.filterCount.textContent = `${filteredTopics.length} ${UI.labels.filterCount}`;
+                renderContent();
+            }
+
+            function renderContent() {
+                if (currentView === 'card') renderCardView();
+                else renderTableView();
+            }
+
+            // Generate complete detailed PDF with all topics
+            async function generateCompleteDetailedPDF() {
+                if (filteredTopics.length === 0) return;
+                
+                setStatus('loading', UI.status.generatingDetailed);
+                elements.pdfProgress.style.display = 'block';
+                
+                if (!window.jspdf) {
+                    await new Promise((resolve) => {
+                        const s = document.createElement('script');
+                        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                        s.onload = resolve;
+                        document.body.appendChild(s);
+                    });
+                }
+                
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF();
+                    let y = 20;
+                    const m = 20;
+                    const pageWidth = pdf.internal.pageSize.width;
+                    
+                    // Cover Page
+                    pdf.setFontSize(32);
+                    pdf.setTextColor(167, 139, 250);
+                    pdf.text('C++ Programming', m, y);
+                    y += 20;
+                    
+                    pdf.setFontSize(24);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text('Complete Learning Material', m, y);
+                    y += 30;
+                    
+                    pdf.setFontSize(12);
+                    pdf.setTextColor(200, 200, 200);
+                    pdf.text(`Generated: ${new Date().toLocaleDateString()}`, m, y);
+                    y += 8;
+                    pdf.text(`Total Topics: ${filteredTopics.length}`, m, y);
+                    y += 8;
+                    pdf.text(`Categories: ${categories.size}`, m, y);
+                    y += 8;
+                    pdf.text(`Topics with Code: ${filteredTopics.filter(t => t.realCode).length}`, m, y);
+                    y += 8;
+                    pdf.text(`Topics with Complexity: ${filteredTopics.filter(t => !t.timeComplexity.includes('Not Available')).length}`, m, y);
+                    y += 20;
+                    
+                    pdf.setFontSize(14);
+                    pdf.text('Table of Contents', m, y);
+                    y += 10;
+                    
+                    // Table of Contents
+                    const grouped = {};
+                    filteredTopics.forEach(t => {
+                        if (!grouped[t.category]) grouped[t.category] = [];
+                        grouped[t.category].push(t);
+                    });
+                    
+                    pdf.setFontSize(10);
+                    Object.keys(grouped).sort().forEach((category, idx) => {
+                        if (y > 250) {
+                            pdf.addPage();
+                            y = 20;
+                        }
+                        pdf.text(`${idx + 1}. ${category} (${grouped[category].length} topics)`, m + 5, y);
+                        y += 5;
+                    });
+                    
+                    // Add each topic in detail
+                    for (let i = 0; i < filteredTopics.length; i++) {
+                        const topic = filteredTopics[i];
+                        
+                        // Update progress
+                        elements.pdfProgress.innerHTML = UI.status.pdfProgress
+                            .replace('{current}', i + 1)
+                            .replace('{total}', filteredTopics.length)
+                            .replace('{title}', topic.title.substring(0, 40));
+                        
+                        pdf.addPage();
+                        y = 20;
+                        
+                        // Topic header
+                        pdf.setFontSize(20);
+                        pdf.setTextColor(167, 139, 250);
+                        pdf.text(`${i + 1}. ${topic.title}`, m, y);
+                        y += 12;
+                        
+                        // Metadata
+                        pdf.setFontSize(10);
+                        pdf.setTextColor(255, 255, 255);
+                        pdf.text(`Category: ${topic.category} | Difficulty: ${topic.difficulty}`, m, y);
+                        y += 7;
+                        
+                        // Concepts
+                        pdf.setFontSize(12);
+                        pdf.setTextColor(167, 139, 250);
+                        pdf.text('Key Concepts', m, y);
+                        y += 7;
+                        
+                        pdf.setFontSize(9);
+                        pdf.setTextColor(200, 200, 200);
+                        if (topic.concepts && topic.concepts.length > 0) {
+                            const conceptLines = pdf.splitTextToSize(topic.concepts[0], pageWidth - 40);
+                            pdf.text(conceptLines, m + 5, y);
+                            y += conceptLines.length * 5 + 5;
+                        }
+                        
+                        // Code
+                        if (topic.realCode) {
+                            if (y > 230) {
+                                pdf.addPage();
+                                y = 20;
+                            }
+                            
+                            pdf.setFontSize(12);
+                            pdf.setTextColor(167, 139, 250);
+                            pdf.text('Code Example', m, y);
+                            y += 7;
+                            
+                            pdf.setFont('courier');
+                            pdf.setFontSize(7);
+                            const codeLines = pdf.splitTextToSize(topic.realCode.substring(0, 800), pageWidth - 40);
+                            pdf.text(codeLines, m + 5, y);
+                            y += codeLines.length * 4 + 10;
+                            pdf.setFont('helvetica');
+                        }
+                        
+                        // Complexity
+                        if (y > 240) {
+                            pdf.addPage();
+                            y = 20;
+                        }
+                        
+                        pdf.setFontSize(12);
+                        pdf.setTextColor(167, 139, 250);
+                        pdf.text('Complexity', m, y);
+                        y += 7;
+                        
+                        pdf.setFontSize(9);
+                        pdf.setTextColor(200, 200, 200);
+                        pdf.text(`Time: ${topic.timeComplexity}`, m + 5, y);
+                        y += 5;
+                        pdf.text(`Space: ${topic.spaceComplexity}`, m + 5, y);
+                        y += 7;
+                        
+                        // URL
+                        pdf.setFontSize(8);
+                        pdf.setTextColor(150, 150, 150);
+                        pdf.text(`Source: ${topic.url}`, m, 280);
+                    }
+                    
+                    // Add footers
+                    const pageCount = pdf.internal.getNumberOfPages();
+                    for (let i = 1; i <= pageCount; i++) {
+                        pdf.setPage(i);
+                        pdf.setFontSize(8);
+                        pdf.setTextColor(150, 150, 150);
+                        pdf.text(`${UI.labels.page} ${i} ${UI.labels.of} ${pageCount}`, m, 290);
+                        pdf.text('Generated by GeeksforGeeks C++ Complete Learning Hub', m, 285);
+                    }
+                    
+                    pdf.save(`GFG_C++_Complete_${new Date().toISOString().slice(0,10)}.pdf`);
+                    setStatus('success', UI.status.pdfDetailedComplete.replace('{count}', filteredTopics.length));
+                    
+                } catch (error) {
+                    setStatus('error', `PDF failed: ${error.message}`);
+                } finally {
+                    elements.pdfProgress.style.display = 'none';
+                }
+            }
+
+            // Generate summary PDF
+            function generateSummaryPDF() {
+                if (filteredTopics.length === 0) return;
+                setStatus('loading', `📚 Generating summary PDF with ${filteredTopics.length} topics...`);
+                
+                if (!window.jspdf) {
+                    const s = document.createElement('script');
+                    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                    s.onload = generateSummaryPDFContent;
+                    document.body.appendChild(s);
+                } else {
+                    generateSummaryPDFContent();
+                }
+            }
+
+            function generateSummaryPDFContent() {
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF();
+                    let y = 20;
+                    const m = 20;
+                    
+                    pdf.setFontSize(28);
+                    pdf.setTextColor(167, 139, 250);
+                    pdf.text('C++ Learning Summary', m, y);
+                    y += 20;
+                    
+                    pdf.setFontSize(12);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text(`Generated: ${new Date().toLocaleDateString()}`, m, y);
+                    y += 8;
+                    pdf.text(`Total Topics: ${filteredTopics.length}`, m, y);
+                    y += 8;
+                    pdf.text(`Categories: ${categories.size}`, m, y);
+                    y += 15;
+                    
+                    filteredTopics.forEach((t, i) => {
+                        if (y > 250) {
+                            pdf.addPage();
+                            y = 20;
+                        }
+                        
+                        pdf.setFontSize(14);
+                        pdf.setTextColor(167, 139, 250);
+                        pdf.text(`${i+1}. ${t.title}`, m, y);
+                        y += 7;
+                        
+                        pdf.setFontSize(10);
+                        pdf.setTextColor(255, 255, 255);
+                        pdf.text(`Category: ${t.category} | Difficulty: ${t.difficulty}`, m + 5, y);
+                        y += 5;
+                        
+                        const concept = pdf.splitTextToSize(t.concepts[0] || '', 160);
+                        pdf.text(concept, m + 5, y);
+                        y += concept.length * 4 + 8;
+                    });
+                    
+                    // Add footers
+                    const pageCount = pdf.internal.getNumberOfPages();
+                    for (let i = 1; i <= pageCount; i++) {
+                        pdf.setPage(i);
+                        pdf.setFontSize(8);
+                        pdf.setTextColor(150, 150, 150);
+                        pdf.text(`${UI.labels.page} ${i} ${UI.labels.of} ${pageCount}`, m, 290);
+                        pdf.text('Generated by GeeksforGeeks C++ Complete Learning Hub', m, 285);
+                    }
+                    
+                    pdf.save(`GFG_C++_Summary_${new Date().toISOString().slice(0,10)}.pdf`);
+                    setStatus('success', UI.status.pdfSummaryComplete.replace('{count}', filteredTopics.length));
+                    
+                } catch (error) {
+                    setStatus('error', `PDF failed: ${error.message}`);
+                }
+            }
+
+            function exportToJSON() {
+                const data = filteredTopics.map(t => ({
+                    title: t.title,
+                    category: t.category,
+                    difficulty: t.difficulty,
+                    concepts: t.concepts,
+                    explanations: t.explanations,
+                    examples: t.examples,
+                    code: t.realCode,
+                    allCode: t.allCode,
+                    timeComplexity: t.timeComplexity,
+                    spaceComplexity: t.spaceComplexity,
+                    detailedComplexity: t.detailedComplexity,
+                    relatedTopics: t.relatedTopics,
+                    url: t.url,
+                    fullArticle: t.fullArticle
+                }));
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = `gfg_cpp_complete_${new Date().toISOString().slice(0,10)}.json`;
+                a.click();
+                
+                setStatus('success', UI.status.exported.replace('{count}', filteredTopics.length));
+            }
+
+            // Event Listeners
+            elements.scrapeBtn.addEventListener('click', startScraping);
+            elements.searchFilter.addEventListener('input', filterTopics);
+            elements.difficultyFilter.addEventListener('change', filterTopics);
+            elements.categoryFilter.addEventListener('change', filterTopics);
+            elements.exportJsonBtn.addEventListener('click', exportToJSON);
+            elements.downloadSummaryPdfBtn.addEventListener('click', generateSummaryPDF);
+            elements.downloadDetailedPdfBtn.addEventListener('click', generateCompleteDetailedPDF);
+            
+            elements.cardViewBtn.addEventListener('click', () => {
+                currentView = 'card';
+                elements.cardViewBtn.classList.add('active');
+                elements.tableViewBtn.classList.remove('active');
+                renderContent();
+            });
+            
+            elements.tableViewBtn.addEventListener('click', () => {
+                currentView = 'table';
+                elements.tableViewBtn.classList.add('active');
+                elements.cardViewBtn.classList.remove('active');
+                renderContent();
+            });
+
+            setStatus('info', UI.status.ready);
+        })();
+    </script>
+</body>
+</html>
