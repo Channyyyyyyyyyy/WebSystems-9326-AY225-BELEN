@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeeksforGeeks C++ Complete Learning Hub</title>
     <style>
+        /* Your existing CSS remains exactly the same */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
@@ -99,7 +100,7 @@
             font-weight: 800;
             margin-bottom: 12px;
             background: linear-gradient(135deg, #a78bfa, #2dd4bf);
-            -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
         }
@@ -805,7 +806,6 @@
     </style>
 </head>
 <body>
-    <!-- Your HTML remains exactly the same -->
     <div class="container">
         <div class="header">
             <h1 id="headerTitle"></h1>
@@ -900,9 +900,7 @@
         </div>
     </div>
 
-    <!-- Your JavaScript remains exactly the same -->
     <script>
-        // Your existing JavaScript code here - unchanged
         (function() {
             // ALL TEXT CONTENT - DYNAMICALLY SET
             const UI = {
@@ -1405,168 +1403,155 @@
                 
                 isScraping = true;
                 elements.scrapeBtn.disabled = true;
-                allTopics = [];
-                categories.clear();
-                
                 elements.emptyState.style.display = 'none';
                 elements.progressSection.style.display = 'block';
-                elements.statsSection.style.display = 'none';
-                elements.filterSection.style.display = 'none';
-                elements.viewToggle.style.display = 'none';
-                elements.contentSection.innerHTML = '';
-                elements.actionSection.style.display = 'none';
-                elements.pdfProgress.style.display = 'none';
+                elements.currentPhase.textContent = 'Initializing...';
                 
                 try {
                     // Discover all topics
                     const discovered = await discoverAllTopics();
                     
-                    if (discovered.length === 0) throw new Error('No topics found');
+                    if (discovered.length === 0) {
+                        throw new Error('No topics found');
+                    }
                     
                     elements.totalCount.textContent = discovered.length;
-                    setStatus('loading', UI.status.scraping.replace('{count}', discovered.length));
+                    elements.currentPhase.textContent = 'Scraping detailed content...';
                     
-                    // Update category filter
-                    const categoryOptions = [`<option value="">${UI.labels.allCategories}</option>`];
-                    Array.from(categories).sort().forEach(c => 
-                        categoryOptions.push(`<option value="${c}">${c}</option>`));
-                    elements.categoryFilter.innerHTML = categoryOptions.join('');
-                    
-                    // Scrape each topic
-                    const scraped = [];
+                    // Extract details for each topic
+                    const detailed = [];
                     for (let i = 0; i < discovered.length; i++) {
-                        elements.currentPhase.textContent = `Scraping detailed content (${i + 1}/${discovered.length})`;
-                        
-                        const detailed = await extractTopicDetails(discovered[i], i + 1, discovered.length);
-                        scraped.push(detailed);
+                        const topic = discovered[i];
+                        const detailedTopic = await extractTopicDetails(topic, i + 1, discovered.length);
+                        detailed.push(detailedTopic);
                         
                         elements.completedCount.textContent = i + 1;
                         elements.progressFill.style.width = `${((i + 1) / discovered.length) * 100}%`;
-                        
-                        // Rate limiting
-                        await new Promise(r => setTimeout(r, 300));
                     }
                     
-                    allTopics = scraped;
-                    filteredTopics = [...allTopics];
-                    
-                    // Update stats
-                    elements.statCategories.textContent = categories.size;
-                    elements.statTotal.textContent = allTopics.length;
-                    elements.statWithCode.textContent = allTopics.filter(t => t.realCode && t.realCode.length > 0).length;
-                    elements.statWithComplexity.textContent = allTopics.filter(t => !t.timeComplexity.includes('Not Available')).length;
-                    
-                    renderContent();
+                    allTopics = detailed;
+                    filterTopics();
                     
                     elements.statsSection.style.display = 'block';
                     elements.filterSection.style.display = 'block';
                     elements.viewToggle.style.display = 'flex';
                     elements.actionSection.style.display = 'block';
-                    elements.progressSection.style.display = 'none';
+                    
+                    updateStats();
+                    renderContent();
                     
                     setStatus('success', UI.status.success.replace('{count}', allTopics.length));
                     
                 } catch (error) {
                     setStatus('error', UI.status.error.replace('{error}', error.message));
-                    elements.emptyState.style.display = 'block';
                 } finally {
                     isScraping = false;
                     elements.scrapeBtn.disabled = false;
+                    elements.progressSection.style.display = 'none';
                 }
             }
 
-            // Card view with only View Online button (no download buttons)
-            function renderCardView() {
-                if (filteredTopics.length === 0) {
-                    elements.contentSection.innerHTML = '<div class="empty-state">No matching topics found</div>';
-                    return;
-                }
+            // Filter topics based on search and filters
+            function filterTopics() {
+                const searchTerm = elements.searchFilter.value.toLowerCase();
+                const difficulty = elements.difficultyFilter.value;
+                const category = elements.categoryFilter.value;
                 
+                filteredTopics = allTopics.filter(topic => {
+                    const matchesSearch = searchTerm === '' || 
+                        topic.title.toLowerCase().includes(searchTerm) ||
+                        topic.concepts.some(c => c.toLowerCase().includes(searchTerm)) ||
+                        topic.realCode.toLowerCase().includes(searchTerm);
+                    
+                    const matchesDifficulty = difficulty === '' || topic.difficulty === difficulty;
+                    const matchesCategory = category === '' || topic.category === category;
+                    
+                    return matchesSearch && matchesDifficulty && matchesCategory;
+                });
+                
+                elements.filterCount.textContent = `${filteredTopics.length} ${UI.labels.filterCount}`;
+                renderContent();
+            }
+
+            // Update category filter options
+            function updateCategoryFilter() {
+                const categoryFilter = elements.categoryFilter;
+                const currentValue = categoryFilter.value;
+                
+                const categories_array = Array.from(new Set(allTopics.map(t => t.category))).sort();
+                
+                categoryFilter.innerHTML = `<option value="">${UI.labels.allCategories}</option>` +
+                    categories_array.map(cat => `<option value="${cat}">${cat}</option>`).join('');
+                
+                if (currentValue && categories_array.includes(currentValue)) {
+                    categoryFilter.value = currentValue;
+                }
+            }
+
+            // Update statistics
+            function updateStats() {
+                elements.statCategories.textContent = new Set(allTopics.map(t => t.category)).size;
+                elements.statTotal.textContent = allTopics.length;
+                elements.statWithCode.textContent = allTopics.filter(t => t.realCode).length;
+                elements.statWithComplexity.textContent = allTopics.filter(t => !t.timeComplexity.includes('Not Available')).length;
+                
+                categories = new Set(allTopics.map(t => t.category));
+                updateCategoryFilter();
+            }
+
+            // Render content based on current view
+            function renderContent() {
+                if (currentView === 'card') {
+                    renderCardView();
+                } else {
+                    renderTableView();
+                }
+            }
+
+            // Render card view
+            function renderCardView() {
                 const grouped = {};
-                filteredTopics.forEach(t => {
-                    if (!grouped[t.category]) grouped[t.category] = [];
-                    grouped[t.category].push(t);
+                filteredTopics.forEach(topic => {
+                    if (!grouped[topic.category]) grouped[topic.category] = [];
+                    grouped[topic.category].push(topic);
                 });
                 
                 let html = '';
+                
                 Object.keys(grouped).sort().forEach(category => {
-                    html += `<div class="category-title">
-                        📌 ${category}
-                        <span class="category-count">${grouped[category].length} topics</span>
-                    </div>`;
+                    html += `<div class="category-title">${category} <span class="category-count">${grouped[category].length}</span></div>`;
                     html += '<div class="subcategory-grid">';
                     
                     grouped[category].forEach(topic => {
-                        // Show real code with full content
-                        const codeDisplay = topic.realCode && topic.realCode.length > 0 
-                            ? `<div class="code-preview-container">
-                                <pre class="code-preview">${escapeHtml(topic.realCode.substring(0, 400))}${topic.realCode.length > 400 ? '\n// ... (full code in PDF)' : ''}</pre>
-                               </div>`
-                            : `<div class="code-preview-container" style="color: #888; font-style: italic;">
-                                <pre class="code-preview">${UI.labels.noCodeAvailable}</pre>
-                               </div>`;
-                        
-                        // Show explanations
-                        const explanationsHtml = topic.explanations && topic.explanations.length > 0
-                            ? `<div style="margin: 10px 0; padding: 10px; background: var(--bg-surface); border-radius: 8px;">
-                                <strong>📝 Key Points:</strong>
-                                <ul style="margin-top: 5px; padding-left: 20px; color: var(--text-secondary);">
-                                    ${topic.explanations.slice(0, 2).map(e => 
-                                        `<li style="margin: 5px 0;">${escapeHtml(e.substring(0, 100))}...</li>`
-                                    ).join('')}
-                                </ul>
-                               </div>`
-                            : '';
-                        
-                        // Show examples
-                        const examplesHtml = topic.examples && topic.examples.length > 0
-                            ? `<div style="margin: 10px 0;">
-                                <strong>💡 Examples:</strong>
-                                <div style="margin-top: 5px;">
-                                    ${topic.examples.slice(0, 2).map(e => 
-                                        `<div style="background: var(--bg-surface); padding: 5px 10px; border-radius: 8px; margin: 5px 0; font-size: 0.9em; border: 1px solid var(--border);">
-                                            ${escapeHtml(e.substring(0, 80))}...
-                                        </div>`
-                                    ).join('')}
-                                </div>
-                               </div>`
-                            : '';
-                        
-                        // Show related topics
-                        const relatedHtml = topic.relatedTopics && topic.relatedTopics.length > 0 ? `
-                            <div style="margin: 10px 0; font-size: 0.85em;">
-                                <strong>${UI.labels.subtopics}</strong>
-                                <div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px;">
-                                    ${topic.relatedTopics.map(r => 
-                                        `<span style="background: var(--bg-surface); padding: 2px 8px; border-radius: 12px; font-size: 0.8em; border: 1px solid var(--border);">
-                                            ${escapeHtml(r.title.substring(0, 25))}
-                                        </span>`
-                                    ).join('')}
-                                </div>
-                            </div>
-                        ` : '';
-                        
                         html += `
                             <div class="topic-card">
                                 <div class="topic-header">
-                                    <span class="topic-title">${escapeHtml(topic.title)}</span>
-                                    <span class="difficulty-badge difficulty-${topic.difficulty.toLowerCase()}">${topic.difficulty}</span>
+                                    <div class="topic-title">${escapeHtml(topic.title)}</div>
+                                    <div class="difficulty-badge difficulty-${topic.difficulty.toLowerCase()}">${topic.difficulty}</div>
                                 </div>
+                                
                                 <div class="topic-concepts">
-                                    <strong>${UI.labels.concepts}:</strong><br>
                                     ${escapeHtml(topic.concepts[0] || UI.labels.noDescription)}
                                 </div>
-                                ${explanationsHtml}
-                                ${codeDisplay}
-                                ${examplesHtml}
-                                ${relatedHtml}
+                                
+                                ${topic.realCode ? `
+                                    <div class="code-preview-container">
+                                        <pre class="code-preview">${escapeHtml(topic.realCode.substring(0, 200))}${topic.realCode.length > 200 ? '...' : ''}</pre>
+                                    </div>
+                                ` : ''}
+                                
                                 <div class="topic-meta">
-                                    <span class="meta-item">💻 ${topic.realCode ? UI.labels.hasCode : UI.labels.noCode}</span>
-                                    <span class="meta-item">⏱️ ${!topic.timeComplexity.includes('Not Available') ? UI.labels.hasComplexity : UI.labels.noComplexity}</span>
+                                    <span class="meta-item ${topic.realCode ? 'has-code' : 'no-code'}">
+                                        ${topic.realCode ? UI.labels.hasCode : UI.labels.noCode}
+                                    </span>
+                                    <span class="meta-item ${!topic.timeComplexity.includes('Not Available') ? 'has-complexity' : 'no-complexity'}">
+                                        ${!topic.timeComplexity.includes('Not Available') ? UI.labels.hasComplexity : UI.labels.noComplexity}
+                                    </span>
                                 </div>
+                                
                                 <div class="topic-actions">
                                     <a href="${escapeHtml(topic.url)}" target="_blank" class="btn btn-small btn-secondary">
-                                        🔗 ${UI.buttons.viewOnline}
+                                        ${UI.buttons.viewOnline}
                                     </a>
                                 </div>
                             </div>
@@ -1579,319 +1564,39 @@
                 elements.contentSection.innerHTML = html;
             }
 
-            // Table view with only View Online button (no download buttons)
+            // Render table view
             function renderTableView() {
-                if (filteredTopics.length === 0) {
-                    elements.contentSection.innerHTML = '<div class="empty-state">No matching topics found</div>';
-                    return;
-                }
+                let html = '<div class="table-container"><table>';
                 
-                let html = `
-                    <div class="table-container">
-                        <table>
-                            <thead><tr>${UI.tableHeaders.map(h => `<th>${h}</th>`).join('')}</tr></thead>
-                            <tbody>
-                `;
+                // Headers
+                html += '<thead><tr>';
+                UI.tableHeaders.forEach(header => {
+                    html += `<th>${header}</th>`;
+                });
+                html += '</tr></thead><tbody>';
                 
-                filteredTopics.forEach((t, i) => {
-                    const codePreview = t.realCode ? t.realCode.substring(0, 40) + '...' : 'No code';
-                    const conceptsPreview = t.concepts[0] ? t.concepts[0].substring(0, 60) + '...' : 'No preview';
-                    
-                    html += `
-                        <tr>
-                            <td>${i + 1}</td>
-                            <td>${escapeHtml(t.category)}</td>
-                            <td><strong>${escapeHtml(t.title)}</strong></td>
-                            <td><span class="difficulty-badge difficulty-${t.difficulty.toLowerCase()}">${t.difficulty}</span></td>
-                            <td><div style="max-width: 200px; font-size: 0.9em; color: var(--text-secondary);">${escapeHtml(conceptsPreview)}</div></td>
-                            <td><code style="background: var(--bg-surface); padding:2px 5px; display:block; max-width:200px; overflow:hidden; border-radius:4px;">${escapeHtml(codePreview)}</code></td>
-                            <td>${escapeHtml(t.timeComplexity.substring(0, 20))}</td>
-                            <td>${escapeHtml(t.spaceComplexity.substring(0, 20))}</td>
-                            <td>
-                                <div class="table-actions">
-                                    <a href="${escapeHtml(t.url)}" target="_blank" class="btn btn-small btn-secondary">
-                                        🔗 ${UI.buttons.viewOnline}
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
+                // Rows
+                filteredTopics.forEach((topic, index) => {
+                    html += '<tr>';
+                    html += `<td>${index + 1}</td>`;
+                    html += `<td>${escapeHtml(topic.category)}</td>`;
+                    html += `<td>${escapeHtml(topic.title)}</td>`;
+                    html += `<td><span class="difficulty-badge difficulty-${topic.difficulty.toLowerCase()}">${topic.difficulty}</span></td>`;
+                    html += `<td>${escapeHtml(topic.concepts[0] || '').substring(0, 50)}...</td>`;
+                    html += `<td>${topic.realCode ? '✅' : '❌'}</td>`;
+                    html += `<td>${escapeHtml(topic.timeComplexity)}</td>`;
+                    html += `<td>${escapeHtml(topic.spaceComplexity)}</td>`;
+                    html += `<td class="table-actions">
+                        <a href="${escapeHtml(topic.url)}" target="_blank" class="btn btn-small btn-secondary">${UI.buttons.viewOnline}</a>
+                    </td>`;
+                    html += '</tr>';
                 });
                 
                 html += '</tbody></table></div>';
                 elements.contentSection.innerHTML = html;
             }
 
-            function filterTopics() {
-                const search = elements.searchFilter.value.toLowerCase();
-                const difficulty = elements.difficultyFilter.value;
-                const category = elements.categoryFilter.value;
-                
-                filteredTopics = allTopics.filter(t => {
-                    if (search) {
-                        const searchable = `${t.title} ${t.concepts.join(' ')} ${t.explanations.join(' ')} ${t.realCode}`.toLowerCase();
-                        if (!searchable.includes(search)) return false;
-                    }
-                    if (difficulty && t.difficulty !== difficulty) return false;
-                    if (category && t.category !== category) return false;
-                    return true;
-                });
-                
-                elements.filterCount.textContent = `${filteredTopics.length} ${UI.labels.filterCount}`;
-                renderContent();
-            }
-
-            function renderContent() {
-                if (currentView === 'card') renderCardView();
-                else renderTableView();
-            }
-
-            // Generate complete detailed PDF with all topics
-            async function generateCompleteDetailedPDF() {
-                if (filteredTopics.length === 0) return;
-                
-                setStatus('loading', UI.status.generatingDetailed);
-                elements.pdfProgress.style.display = 'block';
-                
-                if (!window.jspdf) {
-                    await new Promise((resolve) => {
-                        const s = document.createElement('script');
-                        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-                        s.onload = resolve;
-                        document.body.appendChild(s);
-                    });
-                }
-                
-                try {
-                    const { jsPDF } = window.jspdf;
-                    const pdf = new jsPDF();
-                    let y = 20;
-                    const m = 20;
-                    const pageWidth = pdf.internal.pageSize.width;
-                    
-                    // Cover Page
-                    pdf.setFontSize(32);
-                    pdf.setTextColor(167, 139, 250);
-                    pdf.text('C++ Programming', m, y);
-                    y += 20;
-                    
-                    pdf.setFontSize(24);
-                    pdf.setTextColor(255, 255, 255);
-                    pdf.text('Complete Learning Material', m, y);
-                    y += 30;
-                    
-                    pdf.setFontSize(12);
-                    pdf.setTextColor(200, 200, 200);
-                    pdf.text(`Generated: ${new Date().toLocaleDateString()}`, m, y);
-                    y += 8;
-                    pdf.text(`Total Topics: ${filteredTopics.length}`, m, y);
-                    y += 8;
-                    pdf.text(`Categories: ${categories.size}`, m, y);
-                    y += 8;
-                    pdf.text(`Topics with Code: ${filteredTopics.filter(t => t.realCode).length}`, m, y);
-                    y += 8;
-                    pdf.text(`Topics with Complexity: ${filteredTopics.filter(t => !t.timeComplexity.includes('Not Available')).length}`, m, y);
-                    y += 20;
-                    
-                    pdf.setFontSize(14);
-                    pdf.text('Table of Contents', m, y);
-                    y += 10;
-                    
-                    // Table of Contents
-                    const grouped = {};
-                    filteredTopics.forEach(t => {
-                        if (!grouped[t.category]) grouped[t.category] = [];
-                        grouped[t.category].push(t);
-                    });
-                    
-                    pdf.setFontSize(10);
-                    Object.keys(grouped).sort().forEach((category, idx) => {
-                        if (y > 250) {
-                            pdf.addPage();
-                            y = 20;
-                        }
-                        pdf.text(`${idx + 1}. ${category} (${grouped[category].length} topics)`, m + 5, y);
-                        y += 5;
-                    });
-                    
-                    // Add each topic in detail
-                    for (let i = 0; i < filteredTopics.length; i++) {
-                        const topic = filteredTopics[i];
-                        
-                        // Update progress
-                        elements.pdfProgress.innerHTML = UI.status.pdfProgress
-                            .replace('{current}', i + 1)
-                            .replace('{total}', filteredTopics.length)
-                            .replace('{title}', topic.title.substring(0, 40));
-                        
-                        pdf.addPage();
-                        y = 20;
-                        
-                        // Topic header
-                        pdf.setFontSize(20);
-                        pdf.setTextColor(167, 139, 250);
-                        pdf.text(`${i + 1}. ${topic.title}`, m, y);
-                        y += 12;
-                        
-                        // Metadata
-                        pdf.setFontSize(10);
-                        pdf.setTextColor(255, 255, 255);
-                        pdf.text(`Category: ${topic.category} | Difficulty: ${topic.difficulty}`, m, y);
-                        y += 7;
-                        
-                        // Concepts
-                        pdf.setFontSize(12);
-                        pdf.setTextColor(167, 139, 250);
-                        pdf.text('Key Concepts', m, y);
-                        y += 7;
-                        
-                        pdf.setFontSize(9);
-                        pdf.setTextColor(200, 200, 200);
-                        if (topic.concepts && topic.concepts.length > 0) {
-                            const conceptLines = pdf.splitTextToSize(topic.concepts[0], pageWidth - 40);
-                            pdf.text(conceptLines, m + 5, y);
-                            y += conceptLines.length * 5 + 5;
-                        }
-                        
-                        // Code
-                        if (topic.realCode) {
-                            if (y > 230) {
-                                pdf.addPage();
-                                y = 20;
-                            }
-                            
-                            pdf.setFontSize(12);
-                            pdf.setTextColor(167, 139, 250);
-                            pdf.text('Code Example', m, y);
-                            y += 7;
-                            
-                            pdf.setFont('courier');
-                            pdf.setFontSize(7);
-                            const codeLines = pdf.splitTextToSize(topic.realCode.substring(0, 800), pageWidth - 40);
-                            pdf.text(codeLines, m + 5, y);
-                            y += codeLines.length * 4 + 10;
-                            pdf.setFont('helvetica');
-                        }
-                        
-                        // Complexity
-                        if (y > 240) {
-                            pdf.addPage();
-                            y = 20;
-                        }
-                        
-                        pdf.setFontSize(12);
-                        pdf.setTextColor(167, 139, 250);
-                        pdf.text('Complexity', m, y);
-                        y += 7;
-                        
-                        pdf.setFontSize(9);
-                        pdf.setTextColor(200, 200, 200);
-                        pdf.text(`Time: ${topic.timeComplexity}`, m + 5, y);
-                        y += 5;
-                        pdf.text(`Space: ${topic.spaceComplexity}`, m + 5, y);
-                        y += 7;
-                        
-                        // URL
-                        pdf.setFontSize(8);
-                        pdf.setTextColor(150, 150, 150);
-                        pdf.text(`Source: ${topic.url}`, m, 280);
-                    }
-                    
-                    // Add footers
-                    const pageCount = pdf.internal.getNumberOfPages();
-                    for (let i = 1; i <= pageCount; i++) {
-                        pdf.setPage(i);
-                        pdf.setFontSize(8);
-                        pdf.setTextColor(150, 150, 150);
-                        pdf.text(`${UI.labels.page} ${i} ${UI.labels.of} ${pageCount}`, m, 290);
-                        pdf.text('Generated by GeeksforGeeks C++ Complete Learning Hub', m, 285);
-                    }
-                    
-                    pdf.save(`GFG_C++_Complete_${new Date().toISOString().slice(0,10)}.pdf`);
-                    setStatus('success', UI.status.pdfDetailedComplete.replace('{count}', filteredTopics.length));
-                    
-                } catch (error) {
-                    setStatus('error', `PDF failed: ${error.message}`);
-                } finally {
-                    elements.pdfProgress.style.display = 'none';
-                }
-            }
-
-            // Generate summary PDF
-            function generateSummaryPDF() {
-                if (filteredTopics.length === 0) return;
-                setStatus('loading', `📚 Generating summary PDF with ${filteredTopics.length} topics...`);
-                
-                if (!window.jspdf) {
-                    const s = document.createElement('script');
-                    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-                    s.onload = generateSummaryPDFContent;
-                    document.body.appendChild(s);
-                } else {
-                    generateSummaryPDFContent();
-                }
-            }
-
-            function generateSummaryPDFContent() {
-                try {
-                    const { jsPDF } = window.jspdf;
-                    const pdf = new jsPDF();
-                    let y = 20;
-                    const m = 20;
-                    
-                    pdf.setFontSize(28);
-                    pdf.setTextColor(167, 139, 250);
-                    pdf.text('C++ Learning Summary', m, y);
-                    y += 20;
-                    
-                    pdf.setFontSize(12);
-                    pdf.setTextColor(255, 255, 255);
-                    pdf.text(`Generated: ${new Date().toLocaleDateString()}`, m, y);
-                    y += 8;
-                    pdf.text(`Total Topics: ${filteredTopics.length}`, m, y);
-                    y += 8;
-                    pdf.text(`Categories: ${categories.size}`, m, y);
-                    y += 15;
-                    
-                    filteredTopics.forEach((t, i) => {
-                        if (y > 250) {
-                            pdf.addPage();
-                            y = 20;
-                        }
-                        
-                        pdf.setFontSize(14);
-                        pdf.setTextColor(167, 139, 250);
-                        pdf.text(`${i+1}. ${t.title}`, m, y);
-                        y += 7;
-                        
-                        pdf.setFontSize(10);
-                        pdf.setTextColor(255, 255, 255);
-                        pdf.text(`Category: ${t.category} | Difficulty: ${t.difficulty}`, m + 5, y);
-                        y += 5;
-                        
-                        const concept = pdf.splitTextToSize(t.concepts[0] || '', 160);
-                        pdf.text(concept, m + 5, y);
-                        y += concept.length * 4 + 8;
-                    });
-                    
-                    // Add footers
-                    const pageCount = pdf.internal.getNumberOfPages();
-                    for (let i = 1; i <= pageCount; i++) {
-                        pdf.setPage(i);
-                        pdf.setFontSize(8);
-                        pdf.setTextColor(150, 150, 150);
-                        pdf.text(`${UI.labels.page} ${i} ${UI.labels.of} ${pageCount}`, m, 290);
-                        pdf.text('Generated by GeeksforGeeks C++ Complete Learning Hub', m, 285);
-                    }
-                    
-                    pdf.save(`GFG_C++_Summary_${new Date().toISOString().slice(0,10)}.pdf`);
-                    setStatus('success', UI.status.pdfSummaryComplete.replace('{count}', filteredTopics.length));
-                    
-                } catch (error) {
-                    setStatus('error', `PDF failed: ${error.message}`);
-                }
-            }
-
+            // Export to JSON
             function exportToJSON() {
                 const data = filteredTopics.map(t => ({
                     title: t.title,
@@ -1917,6 +1622,707 @@
                 a.click();
                 
                 setStatus('success', UI.status.exported.replace('{count}', filteredTopics.length));
+            }
+
+            // ========== PDF GENERATION FUNCTIONS ==========
+            
+            async function generateCompleteDetailedPDF() {
+                if (filteredTopics.length === 0) {
+                    setStatus('warning', '⚠️ No topics to generate PDF');
+                    return;
+                }
+                
+                setStatus('loading', '📄 Generating comprehensive learning material...');
+                elements.pdfProgress.style.display = 'block';
+                
+                if (!window.jspdf) {
+                    await new Promise((resolve) => {
+                        const s = document.createElement('script');
+                        s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                        s.onload = resolve;
+                        document.body.appendChild(s);
+                    });
+                }
+                
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'mm',
+                        format: 'a4'
+                    });
+                    
+                    // Get dynamic statistics
+                    const totalTopics = filteredTopics.length;
+                    const totalCategories = new Set(filteredTopics.map(t => t.category)).size;
+                    const topicsWithCode = filteredTopics.filter(t => t.realCode && t.realCode.length > 0).length;
+                    const topicsWithComplexity = filteredTopics.filter(t => !t.timeComplexity.includes('Not Available')).length;
+                    const easyCount = filteredTopics.filter(t => t.difficulty === 'Easy').length;
+                    const mediumCount = filteredTopics.filter(t => t.difficulty === 'Medium').length;
+                    const hardCount = filteredTopics.filter(t => t.difficulty === 'Hard').length;
+                    
+                    // ========== COVER PAGE ==========
+                    // Header decoration with adjusted color for better visibility
+                    pdf.setFillColor(106, 90, 205); // Slate Blue for better print quality
+                    pdf.rect(0, 0, 210, 15, 'F');
+                    
+                    pdf.setFont('helvetica', 'bold'); // Changed to helvetica for better compatibility
+                    pdf.setFontSize(36);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text('C++ PROGRAMMING', 105, 30, { align: 'center' });
+                    
+                    pdf.setFontSize(24);
+                    pdf.setTextColor(240, 240, 255);
+                    pdf.text('Complete Learning Material', 105, 45, { align: 'center' });
+                    
+                    // Main title box with dynamic content
+                    pdf.setFillColor(250, 250, 255);
+                    pdf.roundedRect(30, 70, 150, 85, 5, 5, 'F');
+                    pdf.setDrawColor(106, 90, 205);
+                    pdf.setLineWidth(0.5);
+                    pdf.roundedRect(30, 70, 150, 85, 5, 5, 'S');
+                    
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(16);
+                    pdf.setTextColor(106, 90, 205);
+                    pdf.text('COMPREHENSIVE STUDY GUIDE', 105, 90, { align: 'center' });
+                    
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(11);
+                    pdf.setTextColor(60, 60, 60);
+                    
+                    // Statistics in cover - all dynamic
+                    let statY = 105;
+                    pdf.text(`📚 Total Topics: ${totalTopics}`, 105, statY, { align: 'center' });
+                    statY += 7;
+                    pdf.text(`📊 Categories: ${totalCategories}`, 105, statY, { align: 'center' });
+                    statY += 7;
+                    pdf.text(`💻 Topics with Code: ${topicsWithCode}`, 105, statY, { align: 'center' });
+                    statY += 7;
+                    pdf.text(`⚡ Complexity Analysis: ${topicsWithComplexity}`, 105, statY, { align: 'center' });
+                    statY += 7;
+                    pdf.text(`📅 Generated: ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}`, 105, statY, { align: 'center' });
+                    
+                    // Footer
+                    pdf.setFont('helvetica', 'italic');
+                    pdf.setFontSize(8);
+                    pdf.setTextColor(100, 100, 100);
+                    pdf.text('GeeksforGeeks C++ Learning Hub', 105, 270, { align: 'center' });
+                    
+                    // ========== TABLE OF CONTENTS ==========
+                    pdf.addPage();
+                    
+                    // Section header
+                    pdf.setFillColor(106, 90, 205);
+                    pdf.rect(0, 0, 210, 8, 'F');
+                    
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(24);
+                    pdf.setTextColor(106, 90, 205);
+                    pdf.text('TABLE OF CONTENTS', 105, 30, { align: 'center' });
+                    
+                    pdf.setDrawColor(106, 90, 205);
+                    pdf.setLineWidth(0.5);
+                    pdf.line(20, 40, 190, 40);
+                    
+                    // TOC Header
+                    let tocY = 50;
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(12);
+                    pdf.setTextColor(0, 0, 0);
+                    pdf.text('Section', 20, tocY);
+                    pdf.text('Page', 180, tocY, { align: 'right' });
+                    tocY += 10;
+                    
+                    // Group by category for TOC
+                    const grouped = {};
+                    filteredTopics.forEach(t => {
+                        if (!grouped[t.category]) grouped[t.category] = [];
+                        grouped[t.category].push(t);
+                    });
+                    
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(10);
+                    
+                    let pageCounter = 2;
+                    Object.keys(grouped).sort().forEach((category, catIdx) => {
+                        if (tocY > 260) {
+                            pdf.addPage();
+                            tocY = 30;
+                            pdf.setFillColor(106, 90, 205);
+                            pdf.rect(0, 0, 210, 8, 'F');
+                            pdf.setFont('helvetica', 'bold');
+                            pdf.setFontSize(16);
+                            pdf.setTextColor(106, 90, 205);
+                            pdf.text('TABLE OF CONTENTS (continued)', 105, 25, { align: 'center' });
+                            pdf.setFont('helvetica', 'normal');
+                            pdf.setFontSize(10);
+                        }
+                        
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setTextColor(106, 90, 205);
+                        pdf.text(`${String.fromCharCode(65 + catIdx)}. ${category}`, 20, tocY);
+                        tocY += 6;
+                        
+                        pdf.setFont('helvetica', 'normal');
+                        pdf.setTextColor(80, 80, 80);
+                        
+                        grouped[category].forEach((topic, idx) => {
+                            if (tocY > 260) {
+                                pdf.addPage();
+                                tocY = 30;
+                                pdf.setFillColor(106, 90, 205);
+                                pdf.rect(0, 0, 210, 8, 'F');
+                                pdf.setFont('helvetica', 'bold');
+                                pdf.setFontSize(16);
+                                pdf.setTextColor(106, 90, 205);
+                                pdf.text('TABLE OF CONTENTS (continued)', 105, 25, { align: 'center' });
+                                pdf.setFont('helvetica', 'normal');
+                                pdf.setFontSize(10);
+                            }
+                            
+                            const title = topic.title.length > 40 ? topic.title.substring(0, 37) + '...' : topic.title;
+                            const dots = '.'.repeat(Math.max(1, 35 - title.length));
+                            pdf.text(`   ${idx + 1}. ${title} ${dots} ${pageCounter}`, 25, tocY);
+                            tocY += 5;
+                            pageCounter++;
+                        });
+                        
+                        tocY += 3;
+                    });
+                    
+                    // ========== INTRODUCTION PAGE ==========
+                    pdf.addPage();
+                    
+                    pdf.setFillColor(106, 90, 205);
+                    pdf.rect(0, 0, 210, 8, 'F');
+                    
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(20);
+                    pdf.setTextColor(106, 90, 205);
+                    pdf.text('INTRODUCTION & LEARNING GUIDE', 20, 25);
+                    pdf.line(20, 30, 190, 30);
+                    
+                    let introY = 45;
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(11);
+                    pdf.setTextColor(60, 60, 60);
+                    
+                    const introText = `This comprehensive learning material contains ${totalTopics} carefully curated C++ programming topics from GeeksforGeeks, organized for efficient study and reference. Each topic has been analyzed and formatted to highlight key concepts, complexity analysis, and practical code implementations.`;
+                    const introLines = pdf.splitTextToSize(introText, 170);
+                    pdf.text(introLines, 20, introY);
+                    introY += introLines.length * 6 + 10;
+                    
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(14);
+                    pdf.setTextColor(106, 90, 205);
+                    pdf.text('Recommended Learning Path', 20, introY);
+                    introY += 8;
+                    
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(11);
+                    const learningTips = [
+                        '1. Start with Easy topics to build fundamental understanding',
+                        '2. Progress to Medium difficulty for deeper concepts',
+                        '3. Tackle Hard topics after mastering the basics',
+                        '4. Study code examples alongside theoretical concepts',
+                        '5. Practice complexity analysis for each algorithm'
+                    ];
+                    
+                    learningTips.forEach(tip => {
+                        if (introY > 260) {
+                            pdf.addPage();
+                            introY = 30;
+                            pdf.setFillColor(106, 90, 205);
+                            pdf.rect(0, 0, 210, 8, 'F');
+                            pdf.setFont('helvetica', 'bold');
+                            pdf.setFontSize(16);
+                            pdf.setTextColor(106, 90, 205);
+                            pdf.text('INTRODUCTION (continued)', 105, 25, { align: 'center' });
+                            pdf.setFont('helvetica', 'normal');
+                            pdf.setFontSize(11);
+                        }
+                        pdf.text(tip, 25, introY);
+                        introY += 7;
+                    });
+                    introY += 10;
+                    
+                    // Content Distribution - all dynamic
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(14);
+                    pdf.setTextColor(106, 90, 205);
+                    pdf.text('Content Distribution', 20, introY);
+                    introY += 8;
+                    
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(11);
+                    
+                    if (introY > 260) {
+                        pdf.addPage();
+                        introY = 30;
+                    }
+                    
+                    pdf.text(`Easy: ${easyCount} (${Math.round(easyCount/totalTopics*100)}%)`, 20, introY);
+                    pdf.setFillColor(200, 230, 200);
+                    pdf.rect(70, introY-4, (easyCount/totalTopics)*80, 5, 'F');
+                    introY += 8;
+                    
+                    pdf.text(`Medium: ${mediumCount} (${Math.round(mediumCount/totalTopics*100)}%)`, 20, introY);
+                    pdf.setFillColor(255, 235, 200);
+                    pdf.rect(70, introY-4, (mediumCount/totalTopics)*80, 5, 'F');
+                    introY += 8;
+                    
+                    pdf.text(`Hard: ${hardCount} (${Math.round(hardCount/totalTopics*100)}%)`, 20, introY);
+                    pdf.setFillColor(255, 200, 200);
+                    pdf.rect(70, introY-4, (hardCount/totalTopics)*80, 5, 'F');
+                    
+                    // ========== TOPIC PAGES ==========
+                    for (let i = 0; i < filteredTopics.length; i++) {
+                        const topic = filteredTopics[i];
+                        
+                        // Update progress
+                        elements.pdfProgress.innerHTML = UI.status.pdfProgress
+                            .replace('{current}', i + 1)
+                            .replace('{total}', filteredTopics.length)
+                            .replace('{title}', topic.title.substring(0, 40));
+                        
+                        pdf.addPage();
+                        let y = 25;
+                        
+                        // Page header
+                        pdf.setFillColor(106, 90, 205);
+                        pdf.rect(0, 0, 210, 8, 'F');
+                        
+                        // Topic number
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(10);
+                        pdf.setTextColor(100, 100, 100);
+                        pdf.text(`TOPIC ${i + 1} of ${filteredTopics.length}`, 20, 20);
+                        
+                        // Difficulty badge
+                        const difficultyColors = {
+                            'Easy': { bg: [220, 240, 220], text: [0, 100, 0] },
+                            'Medium': { bg: [255, 235, 200], text: [150, 100, 0] },
+                            'Hard': { bg: [255, 220, 220], text: [150, 0, 0] }
+                        };
+                        const colors = difficultyColors[topic.difficulty] || difficultyColors['Medium'];
+                        
+                        pdf.setFillColor(...colors.bg);
+                        pdf.rect(160, 15, 30, 8, 'F');
+                        pdf.setFontSize(8);
+                        pdf.setTextColor(...colors.text);
+                        pdf.text(topic.difficulty.toUpperCase(), 175, 21, { align: 'center' });
+                        
+                        // Topic title
+                        y = 35;
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(16);
+                        pdf.setTextColor(106, 90, 205);
+                        const titleLines = pdf.splitTextToSize(`${i + 1}. ${topic.title}`, 170);
+                        pdf.text(titleLines, 20, y);
+                        y += titleLines.length * 6 + 5;
+                        
+                        // Category
+                        pdf.setFont('helvetica', 'italic');
+                        pdf.setFontSize(9);
+                        pdf.setTextColor(100, 100, 100);
+                        pdf.text(`Category: ${topic.category}`, 20, y);
+                        y += 8;
+                        
+                        // ===== KEY CONCEPTS =====
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(12);
+                        pdf.setTextColor(106, 90, 205);
+                        pdf.text('Key Concepts', 20, y);
+                        y += 6;
+                        
+                        pdf.setFont('helvetica', 'normal');
+                        pdf.setFontSize(10);
+                        pdf.setTextColor(60, 60, 60);
+                        
+                        if (topic.concepts && topic.concepts.length > 0) {
+                            topic.concepts.slice(0, 3).forEach((concept) => {
+                                if (y > 250) {
+                                    pdf.addPage();
+                                    y = 25;
+                                    pdf.setFillColor(106, 90, 205);
+                                    pdf.rect(0, 0, 210, 8, 'F');
+                                    pdf.setFont('helvetica', 'bold');
+                                    pdf.setFontSize(12);
+                                    pdf.setTextColor(106, 90, 205);
+                                    pdf.text(`${topic.title.substring(0, 40)}... (continued)`, 20, 20);
+                                    y = 30;
+                                    pdf.setFont('helvetica', 'normal');
+                                    pdf.setFontSize(10);
+                                }
+                                
+                                const conceptLines = pdf.splitTextToSize(`• ${concept}`, 160);
+                                pdf.text(conceptLines, 25, y);
+                                y += conceptLines.length * 4 + 2;
+                            });
+                        }
+                        y += 5;
+                        
+                        // ===== COMPLEXITY ANALYSIS =====
+                        if (y > 240) {
+                            pdf.addPage();
+                            y = 25;
+                            pdf.setFillColor(106, 90, 205);
+                            pdf.rect(0, 0, 210, 8, 'F');
+                            pdf.setFont('helvetica', 'bold');
+                            pdf.setFontSize(12);
+                            pdf.setTextColor(106, 90, 205);
+                            pdf.text(`${topic.title.substring(0, 40)}... (continued)`, 20, 20);
+                            y = 30;
+                        }
+                        
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(12);
+                        pdf.setTextColor(106, 90, 205);
+                        pdf.text('Complexity Analysis', 20, y);
+                        y += 6;
+                        
+                        // Complexity boxes
+                        pdf.setFillColor(245, 245, 250);
+                        pdf.roundedRect(20, y-2, 80, 10, 2, 2, 'F');
+                        pdf.roundedRect(105, y-2, 80, 10, 2, 2, 'F');
+                        
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(9);
+                        pdf.setTextColor(106, 90, 205);
+                        pdf.text('TIME', 25, y+3);
+                        pdf.text('SPACE', 110, y+3);
+                        y += 10;
+                        
+                        pdf.setFont('helvetica', 'normal');
+                        pdf.setFontSize(9);
+                        pdf.setTextColor(60, 60, 60);
+                        
+                        const timeText = topic.timeComplexity.length > 30 ? topic.timeComplexity.substring(0, 27) + '...' : topic.timeComplexity;
+                        const spaceText = topic.spaceComplexity.length > 30 ? topic.spaceComplexity.substring(0, 27) + '...' : topic.spaceComplexity;
+                        
+                        pdf.text(timeText, 25, y);
+                        pdf.text(spaceText, 110, y);
+                        y += 8;
+                        
+                        // ===== CODE EXAMPLE =====
+                        if (topic.realCode && topic.realCode.length > 0) {
+                            if (y > 220) {
+                                pdf.addPage();
+                                y = 25;
+                                pdf.setFillColor(106, 90, 205);
+                                pdf.rect(0, 0, 210, 8, 'F');
+                                pdf.setFont('helvetica', 'bold');
+                                pdf.setFontSize(12);
+                                pdf.setTextColor(106, 90, 205);
+                                pdf.text(`${topic.title.substring(0, 40)}... (continued)`, 20, 20);
+                                y = 30;
+                            }
+                            
+                            pdf.setFont('helvetica', 'bold');
+                            pdf.setFontSize(12);
+                            pdf.setTextColor(106, 90, 205);
+                            pdf.text('Code Example', 20, y);
+                            y += 6;
+                            
+                            // Code block
+                            pdf.setFillColor(250, 250, 250);
+                            pdf.roundedRect(20, y-2, 170, 45, 2, 2, 'F');
+                            pdf.setDrawColor(200, 200, 200);
+                            pdf.roundedRect(20, y-2, 170, 45, 2, 2, 'S');
+                            
+                            pdf.setFont('courier', 'normal');
+                            pdf.setFontSize(7);
+                            pdf.setTextColor(40, 40, 40);
+                            
+                            const codeLines = pdf.splitTextToSize(topic.realCode.substring(0, 400), 140);
+                            const displayLines = codeLines.slice(0, 6);
+                            
+                            displayLines.forEach((line, idx) => {
+                                pdf.setTextColor(150, 150, 150);
+                                pdf.text(`${idx + 1}.`, 23, y + (idx * 4.5));
+                                pdf.setTextColor(40, 40, 40);
+                                pdf.text(line, 30, y + (idx * 4.5));
+                            });
+                            
+                            if (codeLines.length > 6) {
+                                pdf.setTextColor(150, 150, 150);
+                                pdf.text('// ...', 23, y + 32);
+                            }
+                            
+                            y += 50;
+                            pdf.setFont('helvetica', 'normal');
+                        }
+                        
+                        // ===== KEY TAKEAWAYS =====
+                        if (y > 250) {
+                            pdf.addPage();
+                            y = 25;
+                            pdf.setFillColor(106, 90, 205);
+                            pdf.rect(0, 0, 210, 8, 'F');
+                            pdf.setFont('helvetica', 'bold');
+                            pdf.setFontSize(12);
+                            pdf.setTextColor(106, 90, 205);
+                            pdf.text(`${topic.title.substring(0, 40)}... (continued)`, 20, 20);
+                            y = 30;
+                        }
+                        
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(12);
+                        pdf.setTextColor(106, 90, 205);
+                        pdf.text('Key Takeaways', 20, y);
+                        y += 6;
+                        
+                        pdf.setFont('helvetica', 'normal');
+                        pdf.setFontSize(9);
+                        pdf.setTextColor(60, 60, 60);
+                        
+                        const take1 = topic.concepts && topic.concepts[0] ? topic.concepts[0].substring(0, 70) + '...' : 'Core concepts covered in this topic';
+                        const take2 = !topic.timeComplexity.includes('Not Available') ? 
+                            `${topic.timeComplexity} time, ${topic.spaceComplexity} space` : 
+                            'Refer to complexity analysis section';
+                        
+                        const takeaways = [
+                            `• Core Concept: ${take1}`,
+                            `• Performance: ${take2}`,
+                            `• Difficulty: ${topic.difficulty} - ${topic.difficulty === 'Easy' ? 'Fundamental' : topic.difficulty === 'Medium' ? 'Intermediate' : 'Advanced'}`
+                        ];
+                        
+                        takeaways.forEach(take => {
+                            const takeLines = pdf.splitTextToSize(take, 160);
+                            pdf.text(takeLines, 25, y);
+                            y += takeLines.length * 3.5 + 2;
+                        });
+                        
+                        // Page footer
+                        pdf.setFont('helvetica', 'italic');
+                        pdf.setFontSize(6);
+                        pdf.setTextColor(150, 150, 150);
+                        
+                        let sourceUrl = topic.url || 'Source: GeeksforGeeks';
+                        if (sourceUrl.length > 60) sourceUrl = sourceUrl.substring(0, 57) + '...';
+                        
+                        pdf.text(sourceUrl, 20, 285);
+                        pdf.text(`Page ${pdf.internal.getNumberOfPages()}`, 190, 285, { align: 'right' });
+                    }
+                    
+                    // ========== APPENDIX ==========
+                    pdf.addPage();
+                    
+                    pdf.setFillColor(106, 90, 205);
+                    pdf.rect(0, 0, 210, 8, 'F');
+                    
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(20);
+                    pdf.setTextColor(106, 90, 205);
+                    pdf.text('APPENDIX: STUDY RESOURCES', 20, 25);
+                    pdf.line(20, 30, 190, 30);
+                    
+                    let appY = 45;
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(9);
+                    
+                    // Get unique categories for summary
+                    const uniqueCategories = [...new Set(filteredTopics.map(t => t.category))].sort();
+                    
+                    const appendix = [
+                        '📌 Quick Reference Tips:',
+                        '',
+                        '• Review concepts in order of increasing difficulty',
+                        '• Practice coding along with the examples provided',
+                        '• Analyze time/space complexity for each algorithm',
+                        '• Use the complexity analysis for interview preparation',
+                        '',
+                        '📊 Category Summary:',
+                        ...uniqueCategories.map(cat => `   - ${cat}: ${filteredTopics.filter(t => t.category === cat).length} topics`),
+                        '',
+                        '📈 Difficulty Breakdown:',
+                        `   - Easy: ${easyCount} topics (${Math.round(easyCount/totalTopics*100)}%)`,
+                        `   - Medium: ${mediumCount} topics (${Math.round(mediumCount/totalTopics*100)}%)`,
+                        `   - Hard: ${hardCount} topics (${Math.round(hardCount/totalTopics*100)}%)`,
+                        '',
+                        '📚 Study Recommendations:',
+                        '   • Daily Goal: Review 3-5 topics',
+                        '   • Weekly Goal: Complete one category',
+                        '   • Monthly Goal: Master all topics',
+                        '',
+                        `📅 Material Generated: ${new Date().toLocaleDateString()}`,
+                        `📄 Total Pages: ${pdf.internal.getNumberOfPages()}`,
+                        `📊 Topics Covered: ${totalTopics}`,
+                        `💻 Code Examples: ${topicsWithCode}`
+                    ];
+                    
+                    appendix.forEach(line => {
+                        if (appY > 260) {
+                            pdf.addPage();
+                            appY = 30;
+                            pdf.setFillColor(106, 90, 205);
+                            pdf.rect(0, 0, 210, 8, 'F');
+                            pdf.setFont('helvetica', 'bold');
+                            pdf.setFontSize(16);
+                            pdf.setTextColor(106, 90, 205);
+                            pdf.text('APPENDIX (continued)', 105, 25, { align: 'center' });
+                            pdf.setFont('helvetica', 'normal');
+                            pdf.setFontSize(9);
+                        }
+                        
+                        if (line.startsWith('📌') || line.startsWith('📊') || line.startsWith('📈') || line.startsWith('📚')) {
+                            pdf.setFont('helvetica', 'bold');
+                            pdf.setTextColor(106, 90, 205);
+                        } else {
+                            pdf.setFont('helvetica', 'normal');
+                            pdf.setTextColor(60, 60, 60);
+                        }
+                        
+                        pdf.text(line, 20, appY);
+                        appY += line === '' ? 4 : 5;
+                    });
+                    
+                    // Add footers to all pages
+                    const pageCount = pdf.internal.getNumberOfPages();
+                    for (let i = 1; i <= pageCount; i++) {
+                        pdf.setPage(i);
+                        pdf.setFont('helvetica', 'italic');
+                        pdf.setFontSize(6);
+                        pdf.setTextColor(150, 150, 150);
+                        pdf.text('GeeksforGeeks C++ Complete Learning Hub', 20, 290);
+                        pdf.text(`Page ${i} of ${pageCount}`, 190, 290, { align: 'right' });
+                    }
+                    
+                    // Save PDF
+                    const fileName = `GFG_C++_Complete_${new Date().toISOString().slice(0, 10)}.pdf`;
+                    pdf.save(fileName);
+                    
+                    setStatus('success', `✅ Comprehensive PDF generated successfully! (${totalTopics} topics)`);
+                    
+                } catch (error) {
+                    setStatus('error', `❌ PDF generation failed: ${error.message}`);
+                } finally {
+                    elements.pdfProgress.style.display = 'none';
+                }
+            }
+
+            // Summary PDF function
+            function generateSummaryPDF() {
+                if (filteredTopics.length === 0) {
+                    setStatus('warning', '⚠️ No topics to generate summary');
+                    return;
+                }
+                
+                setStatus('loading', '📄 Generating quick reference summary...');
+                
+                if (!window.jspdf) {
+                    const s = document.createElement('script');
+                    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
+                    s.onload = generateSummaryPDFContent;
+                    document.body.appendChild(s);
+                } else {
+                    generateSummaryPDFContent();
+                }
+            }
+
+            function generateSummaryPDFContent() {
+                try {
+                    const { jsPDF } = window.jspdf;
+                    const pdf = new jsPDF({
+                        orientation: 'portrait',
+                        unit: 'mm',
+                        format: 'a4'
+                    });
+                    
+                    const totalTopics = filteredTopics.length;
+                    const totalCategories = new Set(filteredTopics.map(t => t.category)).size;
+                    
+                    // Cover Page
+                    pdf.setFillColor(106, 90, 205);
+                    pdf.rect(0, 0, 210, 20, 'F');
+                    
+                    pdf.setFont('helvetica', 'bold');
+                    pdf.setFontSize(28);
+                    pdf.setTextColor(255, 255, 255);
+                    pdf.text('C++ QUICK REFERENCE', 105, 30, { align: 'center' });
+                    
+                    pdf.setFontSize(16);
+                    pdf.setTextColor(240, 240, 255);
+                    pdf.text('Summary Guide', 105, 45, { align: 'center' });
+                    
+                    // Info box
+                    pdf.setFillColor(250, 250, 255);
+                    pdf.roundedRect(30, 70, 150, 45, 5, 5, 'F');
+                    
+                    pdf.setFont('helvetica', 'normal');
+                    pdf.setFontSize(11);
+                    pdf.setTextColor(60, 60, 60);
+                    pdf.text(`Generated: ${new Date().toLocaleDateString()}`, 105, 85, { align: 'center' });
+                    pdf.text(`Total Topics: ${totalTopics}`, 105, 95, { align: 'center' });
+                    pdf.text(`Categories: ${totalCategories}`, 105, 105, { align: 'center' });
+                    
+                    let y = 140;
+                    
+                    // Topic summaries in two columns
+                    const col1 = 20;
+                    const col2 = 110;
+                    let currentCol = col1;
+                    
+                    filteredTopics.forEach((t, i) => {
+                        if (y > 260) {
+                            pdf.addPage();
+                            y = 30;
+                            currentCol = col1;
+                            pdf.setFillColor(106, 90, 205);
+                            pdf.rect(0, 0, 210, 8, 'F');
+                        }
+                        
+                        if (i > 0 && i % 20 === 0) {
+                            if (currentCol === col1) {
+                                currentCol = col2;
+                                y = 30;
+                            } else {
+                                pdf.addPage();
+                                y = 30;
+                                currentCol = col1;
+                                pdf.setFillColor(106, 90, 205);
+                                pdf.rect(0, 0, 210, 8, 'F');
+                            }
+                        }
+                        
+                        pdf.setFont('helvetica', 'bold');
+                        pdf.setFontSize(9);
+                        pdf.setTextColor(106, 90, 205);
+                        pdf.text(`${i+1}.`, currentCol, y);
+                        
+                        pdf.setFont('helvetica', 'normal');
+                        pdf.setTextColor(60, 60, 60);
+                        const title = t.title.length > 25 ? t.title.substring(0, 22) + '...' : t.title;
+                        pdf.text(title, currentCol + 6, y);
+                        y += 4;
+                        
+                        const diffColor = {
+                            'Easy': [0, 150, 0],
+                            'Medium': [200, 150, 0],
+                            'Hard': [200, 0, 0]
+                        }[t.difficulty] || [100, 100, 100];
+                        
+                        pdf.setFontSize(6);
+                        pdf.setTextColor(...diffColor);
+                        pdf.text(`● ${t.difficulty}`, currentCol + 6, y);
+                        y += 6;
+                    });
+                    
+                    // Footer
+                    pdf.setFont('helvetica', 'italic');
+                    pdf.setFontSize(6);
+                    pdf.setTextColor(150, 150, 150);
+                    pdf.text('GeeksforGeeks C++ Learning Hub - Quick Reference', 105, 285, { align: 'center' });
+                    
+                    const fileName = `GFG_C++_Summary_${new Date().toISOString().slice(0, 10)}.pdf`;
+                    pdf.save(fileName);
+                    
+                    setStatus('success', `✅ Summary PDF generated successfully! (${totalTopics} topics)`);
+                    
+                } catch (error) {
+                    setStatus('error', `❌ PDF generation failed: ${error.message}`);
+                }
             }
 
             // Event Listeners
